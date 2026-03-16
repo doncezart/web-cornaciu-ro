@@ -1,0 +1,7 @@
+# https://cornaciu.ro
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Disallow: /api/
+
+Sitemap: https://cornaciu.ro/sitemap.xml

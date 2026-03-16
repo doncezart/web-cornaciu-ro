@@ -1,0 +1,156 @@
+{
+	"nav": {
+		"about": "Despre",
+		"expertise": "Expertiza",
+		"approach": "Abordare",
+		"articles": "Publicații",
+		"contact": "Contact",
+		"cta": "Consultație Gratuită",
+		"menuLabel": "Meniu navigare"
+	},
+	"hero": {
+		"label": "Cabinet de Avocatură",
+		"title": "Excelență Juridică, Rezultate Concrete",
+		"description": "Reprezentare juridică de nivel superior, fundamentată pe experiență vastă, rigoare profesională și dedicare absolută față de interesele clientului.",
+		"ctaPrimary": "Consultație Gratuită",
+		"ctaSecondary": "Contactează-mă",
+		"statYears": "Ani Experiență",
+		"statCases": "Cazuri Finalizate",
+		"statRate": "Rată de Succes"
+	},
+	"expertise": {
+		"label": "Domenii de Practică",
+		"title": "Expertiză Juridică Comprehensivă",
+		"description": "Asistență juridică specializată în multiple ramuri ale dreptului, cu rezultate demonstrate și experiență profundă în fiecare domeniu de practică.",
+		"civil": "Drept Civil",
+		"civilDesc": "Litigii civile complexe, contracte comerciale, recuperări de creanțe și reprezentare în instanțele superioare.",
+		"commercial": "Drept Comercial",
+		"commercialDesc": "Consultanță corporativă, fuziuni și achiziții, restructurări societare și conformitate reglementară.",
+		"family": "Dreptul Familiei",
+		"familyDesc": "Proceduri de divorț, custodie, partaj matrimonial și protecția intereselor minorilor.",
+		"realestate": "Drept Imobiliar",
+		"realestateDesc": "Tranzacții imobiliare, verificări de conformitate, litigii de proprietate și consultanță în dezvoltări imobiliare.",
+		"labor": "Dreptul Muncii",
+		"laborDesc": "Litigii individuale și colective de muncă, negocieri contractuale și consultanță în relații de muncă.",
+		"criminal": "Drept Penal",
+		"criminalDesc": "Apărare penală strategică, asistență în faza de urmărire penală și reprezentare în proces."
+	},
+	"results": {
+		"label": "Rezultate Demonstrate",
+		"title": "Performanță de Excelență",
+		"description": "Performanță constantă și rezultate măsurabile în reprezentarea intereselor clienților.",
+		"cases": "Cazuri Finalizate cu Succes",
+		"rate": "Rată de Succes în Litigii",
+		"years": "Ani Experiență în Barou",
+		"recovered": "Valoare Recuperată pentru Clienți"
+	},
+	"about": {
+		"label": "Despre Cabinet",
+		"title": "Experiență, Integritate, Rezultate",
+		"p1": "Cu peste 35 ani de practică juridică activă, am dezvoltat o expertiza comprehensivă în multiple domenii ale dreptului, reprezentând cu succes interesele clienților în sute de cazuri complexe.",
+		"p2": "Filosofia cabinetului se bazează pe trei piloni fundamentali: pregătire riguroasă, strategie juridică adaptată fiecărui caz și comunicare transparentă cu clientul pe întreaga durată a reprezentării.",
+		"p3": "Abordarea mea combină cunoașterea profundă a legislației cu experiența practică acumulată în instanțele de toate nivelurile, asigurând o reprezentare juridică de cea mai înaltă calitate.",
+		"credentialsTitle": "Calificări și Afilieri",
+		"cred1": "Membru al Baroului Giurgiu",
+		"cred2": "Certificat în Mediare și Soluționare Alternativă a Disputelor",
+		"cred3": "Formator Continuu în Drept European",
+		"cred4": "Membru al Asociației Internaționale a Avocaților"
+	},
+	"testimonials": {
+		"label": "Feedback Clienți",
+		"title": "Ce Spun Clienții Noștri",
+		"description": "Încrederea și satisfacția clienților reprezintă cel mai valoros indicator al calității serviciilor noastre."
+	},
+	"approach": {
+		"label": "Metodologie",
+		"title": "Abordarea Noastră",
+		"description": "Un proces structurat și metodic care asigură reprezentare juridică optimă.",
+		"step1Title": "Analiză Comprehensivă",
+		"step1Desc": "Evaluare detaliată a situației juridice, identificarea tuturor aspectelor relevante și dezvoltarea unei strategii personalizate adaptate specificului fiecărui caz.",
+		"step2Title": "Strategie Juridică",
+		"step2Desc": "Formularea unei abordări strategice fundamentate pe jurisprudență relevantă, analiză de risc și obiectivele clientului, asigurând cea mai eficientă cale către rezultatul dorit.",
+		"step3Title": "Implementare Riguroasă",
+		"step3Desc": "Executarea strategiei cu atenție la detalii, respectarea termenelor procedurale și menținerea standardelor profesionale la cel mai înalt nivel pe durata întregului proces.",
+		"step4Title": "Comunicare Continuă",
+		"step4Desc": "Informare constantă a clientului asupra evoluției cazului, explicații clare privind procedurile juridice și disponibilitate pentru clarificări și consultări pe tot parcursul colaborării."
+	},
+	"articleCards": {
+		"label": "Publicații",
+		"title": "Articole și Analize Juridice",
+		"description": "Perspective profesionale asupra evoluțiilor legislative și jurisprudențiale recente.",
+		"readMore": "Citește articolul →",
+		"viewAll": "Toate Publicațiile →",
+		"imageAlt": "Imagine Articol"
+	},
+	"contact": {
+		"label": "Contact",
+		"title": "Programează o Consultație",
+		"description": "Suntem disponibili pentru a discuta despre situația dumneavoastră juridică și pentru a oferi consultanță profesională.",
+		"address": "Adresă Cabinet",
+		"addressValue": "Strada Trandafirilor nr. 3, Etaj 3\nPiata Centrala Giurgiu, Romania",
+		"phone": "Telefon",
+		"email": "Email",
+		"mapTitle": "Locația cabinetului pe hartă"
+	},
+	"footer": {
+		"brand": "Servicii juridice de excelență, fundamentate pe experiență vastă, integritate profesională și dedicare absolută către interesele fiecărui client.",
+		"navTitle": "Navigare",
+		"aboutCabinet": "Despre Cabinet",
+		"servicesTitle": "Servicii",
+		"legalTitle": "Legal",
+		"privacy": "Politica de Confidențialitate",
+		"terms": "Termeni și Condiții",
+		"gdpr": "Conformitate GDPR",
+		"copyright": "© {year} Cornaciu. Toate drepturile rezervate."
+	},
+	"cookie": {
+		"text": "Acest site utilizează servicii terțe (Google Fonts, Google Maps) care pot colecta date. Continuarea navigării implică acceptarea {privacyLink} și a {gdprLink}.",
+		"privacyLink": "Politicii de Confidențialitate",
+		"gdprLink": "regulilor GDPR",
+		"accept": "Accept",
+		"decline": "Refuz"
+	},
+	"articles": {
+		"pageTitle": "Publicații | Cabinet Avocat Cornaciu",
+		"pageDescription": "Articole și analize juridice profesionale. Perspective asupra evoluțiilor legislative și jurisprudențiale recente.",
+		"breadcrumbHome": "Acasă",
+		"breadcrumbArticles": "Publicații",
+		"heading": "Articole și Analize Juridice",
+		"description": "Perspective profesionale asupra evoluțiilor legislative și jurisprudențiale recente.",
+		"all": "Toate",
+		"noArticles": "Nu există articole publicate momentan. Reveniți în curând.",
+		"readArticle": "Citește articolul →",
+		"prevPage": "← Anterioare",
+		"nextPage": "Următoare →",
+		"pageOf": "Pagina {page} din {total}",
+		"minRead": "{min} min lectură"
+	},
+	"articleDetail": {
+		"breadcrumbArticle": "Articol",
+		"authorName": "Avocat Cornaciu Cătălin",
+		"authorRole": "Partener, Cornaciu",
+		"authorBio": "Cu peste 35 de ani de experiență în domeniul dreptului civil și comercial, oferă consultanță juridică specializată și reprezentare în instanță pentru clienți corporativi și individuali.",
+		"tags": "Etichete:",
+		"relatedLabel": "Lectură Suplimentară",
+		"relatedTitle": "Articole Conexe",
+		"ctaTitle": "Aveți Nevoie de Consultanță Juridică?",
+		"ctaDescription": "Contactați-ne pentru o evaluare profesională a situației dumneavoastră juridice și pentru a primi asistență specializată.",
+		"ctaButton": "Programare Consultație",
+		"availableIn": "Disponibil și în: "
+	},
+	"seo": {
+		"defaultTitle": "Cabinet Avocat Cornaciu | Excelență în Drept",
+		"defaultDescription": "Reprezentare juridică de nivel superior, fundamentată pe experiență vastă, rigoare profesională și dedicare absolută față de interesele clientului. Cabinet de avocatură Giurgiu."
+	},
+	"legal": {
+		"breadcrumbHome": "Acasă",
+		"lastUpdated": "Ultima actualizare: Martie 2026",
+		"privacyTitle": "Politica de Confidențialitate",
+		"privacySeoDesc": "Politica de confidențialitate a Cabinetului de Avocatură Cornaciu Cătălin din Giurgiu.",
+		"gdprTitle": "Conformitate GDPR",
+		"gdprSeoDesc": "Informații privind conformitatea cu Regulamentul General privind Protecția Datelor (GDPR).",
+		"termsTitle": "Termeni și Condiții",
+		"termsSeoDesc": "Termenii și condițiile de utilizare a site-ului Cabinetului de Avocatură Cornaciu Cătălin."
+	},
+	"skipLink": "Sari la conținut"
+}

@@ -1,0 +1,156 @@
+{
+	"nav": {
+		"about": "About",
+		"expertise": "Expertise",
+		"approach": "Approach",
+		"articles": "Publications",
+		"contact": "Contact",
+		"cta": "Free Consultation",
+		"menuLabel": "Navigation menu"
+	},
+	"hero": {
+		"label": "Law Office",
+		"title": "Legal Excellence, Concrete Results",
+		"description": "Superior legal representation, grounded in extensive experience, professional rigour and absolute dedication to the client's interests.",
+		"ctaPrimary": "Free Consultation",
+		"ctaSecondary": "Contact Me",
+		"statYears": "Years of Experience",
+		"statCases": "Cases Completed",
+		"statRate": "Success Rate"
+	},
+	"expertise": {
+		"label": "Practice Areas",
+		"title": "Comprehensive Legal Expertise",
+		"description": "Specialised legal assistance in multiple branches of law, with proven results and deep experience in every practice area.",
+		"civil": "Civil Law",
+		"civilDesc": "Complex civil litigation, commercial contracts, debt recovery and representation before superior courts.",
+		"commercial": "Commercial Law",
+		"commercialDesc": "Corporate advisory, mergers & acquisitions, corporate restructuring and regulatory compliance.",
+		"family": "Family Law",
+		"familyDesc": "Divorce proceedings, custody, matrimonial division and protection of minors' interests.",
+		"realestate": "Real Estate Law",
+		"realestateDesc": "Real estate transactions, compliance reviews, property litigation and development advisory.",
+		"labor": "Labour Law",
+		"laborDesc": "Individual and collective labour disputes, contract negotiations and employment relations advisory.",
+		"criminal": "Criminal Law",
+		"criminalDesc": "Strategic criminal defence, assistance during investigation and trial representation."
+	},
+	"results": {
+		"label": "Proven Results",
+		"title": "Excellence in Performance",
+		"description": "Consistent performance and measurable results in representing clients' interests.",
+		"cases": "Successfully Completed Cases",
+		"rate": "Litigation Success Rate",
+		"years": "Years of Bar Experience",
+		"recovered": "Value Recovered for Clients"
+	},
+	"about": {
+		"label": "About the Office",
+		"title": "Experience, Integrity, Results",
+		"p1": "With over 35 years of active legal practice, I have developed comprehensive expertise in multiple areas of law, successfully representing clients' interests in hundreds of complex cases.",
+		"p2": "The office's philosophy is built on three fundamental pillars: rigorous preparation, a legal strategy tailored to each case, and transparent communication with the client throughout the representation.",
+		"p3": "My approach combines deep knowledge of legislation with practical experience accumulated in courts at all levels, ensuring legal representation of the highest quality.",
+		"credentialsTitle": "Qualifications & Affiliations",
+		"cred1": "Member of the Giurgiu Bar",
+		"cred2": "Certified in Mediation and Alternative Dispute Resolution",
+		"cred3": "Continuous Training in European Law",
+		"cred4": "Member of the International Bar Association"
+	},
+	"testimonials": {
+		"label": "Client Feedback",
+		"title": "What Our Clients Say",
+		"description": "Clients' trust and satisfaction are the most valuable indicator of the quality of our services."
+	},
+	"approach": {
+		"label": "Methodology",
+		"title": "Our Approach",
+		"description": "A structured and methodical process ensuring optimal legal representation.",
+		"step1Title": "Comprehensive Analysis",
+		"step1Desc": "Detailed assessment of the legal situation, identification of all relevant aspects and development of a personalised strategy tailored to each case.",
+		"step2Title": "Legal Strategy",
+		"step2Desc": "Formulating a strategic approach based on relevant case law, risk analysis and the client's objectives, ensuring the most efficient path to the desired outcome.",
+		"step3Title": "Rigorous Implementation",
+		"step3Desc": "Executing the strategy with attention to detail, compliance with procedural deadlines and maintaining professional standards at the highest level throughout the process.",
+		"step4Title": "Continuous Communication",
+		"step4Desc": "Constant updates on the case's progress, clear explanations of legal procedures and availability for clarifications and consultations throughout the engagement."
+	},
+	"articleCards": {
+		"label": "Publications",
+		"title": "Legal Articles & Analyses",
+		"description": "Professional perspectives on recent legislative and jurisprudential developments.",
+		"readMore": "Read article →",
+		"viewAll": "All Publications →",
+		"imageAlt": "Article Image"
+	},
+	"contact": {
+		"label": "Contact",
+		"title": "Schedule a Consultation",
+		"description": "We are available to discuss your legal situation and provide professional advice.",
+		"address": "Office Address",
+		"addressValue": "Strada Trandafirilor nr. 3, Floor 3\nPiata Centrala Giurgiu, Romania",
+		"phone": "Phone",
+		"email": "Email",
+		"mapTitle": "Office location on map"
+	},
+	"footer": {
+		"brand": "Legal services of excellence, built on extensive experience, professional integrity and absolute dedication to every client's interests.",
+		"navTitle": "Navigation",
+		"aboutCabinet": "About the Office",
+		"servicesTitle": "Services",
+		"legalTitle": "Legal",
+		"privacy": "Privacy Policy",
+		"terms": "Terms & Conditions",
+		"gdpr": "GDPR Compliance",
+		"copyright": "© {year} Cornaciu. All rights reserved."
+	},
+	"cookie": {
+		"text": "This site uses third-party services (Google Fonts, Google Maps) that may collect data. Continued browsing implies acceptance of the {privacyLink} and {gdprLink}.",
+		"privacyLink": "Privacy Policy",
+		"gdprLink": "GDPR rules",
+		"accept": "Accept",
+		"decline": "Decline"
+	},
+	"articles": {
+		"pageTitle": "Publications | Cornaciu Law Office",
+		"pageDescription": "Professional legal articles and analyses. Perspectives on recent legislative and jurisprudential developments.",
+		"breadcrumbHome": "Home",
+		"breadcrumbArticles": "Publications",
+		"heading": "Legal Articles & Analyses",
+		"description": "Professional perspectives on recent legislative and jurisprudential developments.",
+		"all": "All",
+		"noArticles": "No published articles at the moment. Please check back soon.",
+		"readArticle": "Read article →",
+		"prevPage": "← Previous",
+		"nextPage": "Next →",
+		"pageOf": "Page {page} of {total}",
+		"minRead": "{min} min read"
+	},
+	"articleDetail": {
+		"breadcrumbArticle": "Article",
+		"authorName": "Lawyer Cornaciu Cătălin",
+		"authorRole": "Partner, Cornaciu",
+		"authorBio": "With over 35 years of experience in civil and commercial law, providing specialised legal advisory and court representation for corporate and individual clients.",
+		"tags": "Tags:",
+		"relatedLabel": "Further Reading",
+		"relatedTitle": "Related Articles",
+		"ctaTitle": "Need Legal Advice?",
+		"ctaDescription": "Contact us for a professional assessment of your legal situation and to receive specialised assistance.",
+		"ctaButton": "Schedule Consultation",
+		"availableIn": "Also available in: "
+	},
+	"seo": {
+		"defaultTitle": "Cornaciu Law Office | Excellence in Law",
+		"defaultDescription": "Superior legal representation, grounded in extensive experience, professional rigour and absolute dedication to the client's interests. Law office in Giurgiu."
+	},
+	"legal": {
+		"breadcrumbHome": "Home",
+		"lastUpdated": "Last updated: March 2026",
+		"privacyTitle": "Privacy Policy",
+		"privacySeoDesc": "Privacy policy of the Cornaciu Cătălin Law Office in Giurgiu.",
+		"gdprTitle": "GDPR Compliance",
+		"gdprSeoDesc": "Information regarding compliance with the General Data Protection Regulation (GDPR).",
+		"termsTitle": "Terms and Conditions",
+		"termsSeoDesc": "Terms and conditions of use for the Cornaciu Cătălin Law Office website."
+	},
+	"skipLink": "Skip to content"
+}
