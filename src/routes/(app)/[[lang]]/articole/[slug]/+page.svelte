@@ -5,7 +5,7 @@
 	let { data } = $props();
 
 	const locale = $derived(data.locale);
-	const t = $derived(createT(locale));
+	const t = $derived(createT(locale, data.overrides));
 	const a = $derived(data.article);
 
 	function formatDate(date: Date | null): string {

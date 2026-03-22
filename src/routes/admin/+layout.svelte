@@ -23,6 +23,7 @@
 			<a href="/admin/articole" class:active={isActive('/admin/articole')} onclick={() => mobileOpen = false}>Articole</a>
 			<a href="/admin/categorii" class:active={isActive('/admin/categorii')} onclick={() => mobileOpen = false}>Categorii</a>
 			<a href="/admin/testimoniale" class:active={isActive('/admin/testimoniale')} onclick={() => mobileOpen = false}>Testimoniale</a>
+			<a href="/admin/continut" class:active={isActive('/admin/continut')} onclick={() => mobileOpen = false}>Conținut Site</a>
 		</nav>
 		<div class="admin-user">
 			<span>{data.user.name ?? data.user.email}</span>

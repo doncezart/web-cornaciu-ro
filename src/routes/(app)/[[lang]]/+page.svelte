@@ -13,7 +13,7 @@
 	let { data } = $props();
 
 	const locale = $derived(data.locale);
-	const t = $derived(createT(locale));
+	const t = $derived(createT(locale, data.overrides));
 
 	const fallbackTestimonials = [
 		{

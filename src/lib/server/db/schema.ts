@@ -35,4 +35,13 @@ export const category = pgTable('category', {
 	createdAt: timestamp('created_at', { mode: 'date' }).defaultNow()
 });
 
+export const siteText = pgTable('site_text', {
+	id: serial('id').primaryKey(),
+	key: text('key').notNull(),
+	locale: text('locale').notNull(),
+	value: text('value').notNull(),
+	sourceHash: text('source_hash'),
+	updatedAt: timestamp('updated_at', { mode: 'date' }).defaultNow()
+});
+
 export * from './auth.schema';

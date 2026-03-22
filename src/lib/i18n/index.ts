@@ -25,6 +25,25 @@ export const dateLocales: Record<Locale, string> = {
 
 const translations = { ro, en, bg };
 
+/** Flatten a nested object into dot-separated key-value pairs */
+export function flattenTranslations(obj: Record<string, unknown>, prefix = ''): Record<string, string> {
+	const result: Record<string, string> = {};
+	for (const [key, value] of Object.entries(obj)) {
+		const fullKey = prefix ? `${prefix}.${key}` : key;
+		if (typeof value === 'string') {
+			result[fullKey] = value;
+		} else if (typeof value === 'object' && value !== null) {
+			Object.assign(result, flattenTranslations(value as Record<string, unknown>, fullKey));
+		}
+	}
+	return result;
+}
+
+/** Get default (JSON-file) translations for a locale, flattened */
+export function getDefaultTranslations(locale: Locale): Record<string, string> {
+	return flattenTranslations(translations[locale] as unknown as Record<string, unknown>);
+}
+
 export function isLocale(value: string): value is Locale {
 	return locales.includes(value as Locale);
 }
@@ -40,11 +59,11 @@ function getNestedValue(obj: Record<string, unknown>, path: string): string | un
 	return typeof current === 'string' ? current : undefined;
 }
 
-/** Create a translate function for a given locale */
-export function createT(locale: Locale) {
+/** Create a translate function for a given locale, with optional DB overrides */
+export function createT(locale: Locale, overrides?: Record<string, string>) {
 	const dict = translations[locale];
 	return function t(key: string, params?: Record<string, string | number>): string {
-		let value = getNestedValue(dict as unknown as Record<string, unknown>, key) ?? key;
+		let value = overrides?.[key] ?? getNestedValue(dict as unknown as Record<string, unknown>, key) ?? key;
 		if (params) {
 			for (const [k, v] of Object.entries(params)) {
 				value = value.replaceAll(`{${k}}`, String(v));

@@ -6,7 +6,7 @@
 
 	let { children, data } = $props();
 
-	const t = $derived(createT(data.locale));
+	const t = $derived(createT(data.locale, data.overrides));
 </script>
 
 <a href="#main-content" class="skip-link">{t('skipLink')}</a>
