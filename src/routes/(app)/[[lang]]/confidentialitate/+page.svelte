@@ -30,7 +30,9 @@
 <section class="legal-body">
 	<div class="container-narrow">
 		<div class="content">
-			{#if locale === 'en'}
+			{#if data.legalContent}
+				{@html data.legalContent}
+			{:else if locale === 'en'}
 				<h2>1. General Information</h2>
 				<p>
 					Cornaciu Cătălin Law Office, headquartered at Strada Trandafirilor nr. 3, Floor 3,

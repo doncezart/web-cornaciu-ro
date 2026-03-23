@@ -4,6 +4,7 @@ import { article, category } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { locales } from '$lib/i18n';
 import { slugify } from '$lib/utils/slugify';
+import { audit } from '$lib/server/audit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
@@ -50,6 +51,8 @@ export const actions: Actions = {
 			lang,
 			publishedAt: published ? new Date() : null
 		}).returning();
+
+		await audit({ action: 'article.create', entity: 'article', entityId: created.id, details: { title, slug, lang, category: categoryName }, user: locals.user });
 
 		redirect(302, `/admin/articole/${created.id}`);
 	}

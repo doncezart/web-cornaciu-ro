@@ -1,14 +1,33 @@
 import { db } from '$lib/server/db';
-import { siteText } from '$lib/server/db/schema';
-import { eq, and } from 'drizzle-orm';
+import { siteText, siteTextHistory } from '$lib/server/db/schema';
+import { eq, and, desc } from 'drizzle-orm';
 import { fail, error } from '@sveltejs/kit';
 import { getDefaultTranslations, locales, type Locale } from '$lib/i18n';
 import { env } from '$env/dynamic/private';
 import { createHash } from 'crypto';
+import { audit } from '$lib/server/audit';
 import type { Actions, PageServerLoad } from './$types';
 
 function hashText(text: string): string {
 	return createHash('md5').update(text).digest('hex');
+}
+
+/** Archive current value to history before changing it */
+async function archiveField(key: string, locale: string, changeType: string) {
+	const [current] = await db
+		.select()
+		.from(siteText)
+		.where(and(eq(siteText.key, key), eq(siteText.locale, locale)))
+		.limit(1);
+	if (current) {
+		await db.insert(siteTextHistory).values({
+			key,
+			locale,
+			value: current.value,
+			sourceHash: current.sourceHash,
+			changeType
+		});
+	}
 }
 
 /** Section labels shown in the admin UI */
@@ -43,8 +62,18 @@ export const load: PageServerLoad = async ({ url }) => {
 		sourceHashes[row.key] = row.sourceHash;
 	}
 
+	// Load history counts per key for this locale
+	const historyRows = await db
+		.select()
+		.from(siteTextHistory)
+		.where(eq(siteTextHistory.locale, locale));
+	const historyCounts: Record<string, number> = {};
+	for (const row of historyRows) {
+		historyCounts[row.key] = (historyCounts[row.key] ?? 0) + 1;
+	}
+
 	// Group keys by section
-	const sections: Record<string, { key: string; defaultValue: string; override: string | null; isAutoTranslated: boolean }[]> = {};
+	const sections: Record<string, { key: string; defaultValue: string; override: string | null; isAutoTranslated: boolean; historyCount: number }[]> = {};
 	for (const [key, defaultValue] of Object.entries(defaults)) {
 		const section = key.split('.')[0];
 		if (!sections[section]) sections[section] = [];
@@ -52,7 +81,8 @@ export const load: PageServerLoad = async ({ url }) => {
 			key,
 			defaultValue,
 			override: overrides[key] ?? null,
-			isAutoTranslated: sourceHashes[key] != null
+			isAutoTranslated: sourceHashes[key] != null,
+			historyCount: historyCounts[key] ?? 0
 		});
 	}
 
@@ -116,12 +146,13 @@ export const actions: Actions = {
 			}
 		}
 
-		// Delete removed overrides
+		// Delete removed overrides (archive first)
 		for (const key of deletes) {
+			await archiveField(key, locale, 'delete');
 			await db.delete(siteText).where(and(eq(siteText.key, key), eq(siteText.locale, locale)));
 		}
 
-		// Upsert changed values
+		// Upsert changed values (archive old value before overwriting)
 		for (const { key, value } of updates) {
 			const [existing] = await db
 				.select()
@@ -130,6 +161,9 @@ export const actions: Actions = {
 				.limit(1);
 
 			if (existing) {
+				if (existing.value !== value) {
+					await archiveField(key, locale, 'edit');
+				}
 				await db
 					.update(siteText)
 					.set({ value, sourceHash: null, updatedAt: new Date() })
@@ -138,6 +172,8 @@ export const actions: Actions = {
 				await db.insert(siteText).values({ key, locale, value });
 			}
 		}
+
+		await audit({ action: 'content.save', entity: 'content', details: { locale, updatedKeys: updates.map(u => u.key), resetKeys: deletes }, user: locals.user });
 
 		return { success: true };
 	},
@@ -151,7 +187,9 @@ export const actions: Actions = {
 
 		if (!key) return fail(400, { message: 'Cheie invalidă' });
 
+		await archiveField(key, locale, 'delete');
 		await db.delete(siteText).where(and(eq(siteText.key, key), eq(siteText.locale, locale)));
+		await audit({ action: 'content.reset', entity: 'content', details: { key, locale }, user: locals.user });
 		return { success: true };
 	},
 
@@ -246,7 +284,7 @@ export const actions: Actions = {
 			return fail(500, { message: 'Răspunsul AI nu a putut fi procesat' });
 		}
 
-		// Save translated values with source_hash
+		// Save translated values with source_hash (archive old values first)
 		let count = 0;
 		for (const [key, value] of Object.entries(translated)) {
 			if (!(key in toTranslate)) continue;
@@ -260,6 +298,7 @@ export const actions: Actions = {
 				.limit(1);
 
 			if (existing) {
+				await archiveField(key, targetLocale, 'translate');
 				await db
 					.update(siteText)
 					.set({ value, sourceHash: hash, updatedAt: new Date() })
@@ -270,6 +309,78 @@ export const actions: Actions = {
 			count++;
 		}
 
+		await audit({ action: 'content.translate', entity: 'content', details: { targetLocale, fieldsTranslated: count }, user: locals.user });
+
 		return { translated: count };
+	},
+
+	history: async ({ request, locals }) => {
+		if (!locals.user) error(401, 'Neautorizat');
+
+		const formData = await request.formData();
+		const key = formData.get('key')?.toString();
+		const locale = formData.get('locale')?.toString() || 'ro';
+		if (!key) return fail(400, { message: 'Cheie invalidă' });
+
+		const rows = await db
+			.select()
+			.from(siteTextHistory)
+			.where(and(eq(siteTextHistory.key, key), eq(siteTextHistory.locale, locale)))
+			.orderBy(desc(siteTextHistory.changedAt))
+			.limit(20);
+
+		return {
+			historyKey: key,
+			historyEntries: rows.map((r) => ({
+				id: r.id,
+				value: r.value,
+				changeType: r.changeType,
+				changedAt: r.changedAt?.toISOString() ?? null
+			}))
+		};
+	},
+
+	restore: async ({ request, locals }) => {
+		if (!locals.user) error(401, 'Neautorizat');
+
+		const formData = await request.formData();
+		const historyId = Number(formData.get('historyId'));
+		const locale = formData.get('locale')?.toString() || 'ro';
+		if (!historyId) return fail(400, { message: 'ID invalid' });
+
+		const [entry] = await db
+			.select()
+			.from(siteTextHistory)
+			.where(eq(siteTextHistory.id, historyId))
+			.limit(1);
+		if (!entry) return fail(404, { message: 'Versiune negăsită' });
+
+		// Archive current value before restoring
+		await archiveField(entry.key, locale, 'restore');
+
+		// Upsert the restored value
+		const [existing] = await db
+			.select()
+			.from(siteText)
+			.where(and(eq(siteText.key, entry.key), eq(siteText.locale, locale)))
+			.limit(1);
+
+		if (existing) {
+			await db
+				.update(siteText)
+				.set({ value: entry.value, sourceHash: entry.sourceHash, updatedAt: new Date() })
+				.where(eq(siteText.id, existing.id));
+		} else {
+			await db.insert(siteText).values({
+				key: entry.key,
+				locale,
+				value: entry.value,
+				sourceHash: entry.sourceHash
+			});
+		}
+
+		await audit({ action: 'content.restore', entity: 'content', details: { key: entry.key, locale, historyId }, user: locals.user });
+
+		return { restored: true, restoredKey: entry.key };
 	}
 };

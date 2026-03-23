@@ -1,5 +1,6 @@
 import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
+import { audit } from '$lib/server/audit';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request, locals }) => {
@@ -38,6 +39,8 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 
 	const data = await response.json();
 	const summary = data.content?.[0]?.text?.trim() ?? '';
+
+	await audit({ action: 'ai.summarize', entity: 'ai', details: { title }, user: locals.user });
 
 	return json({ summary });
 };

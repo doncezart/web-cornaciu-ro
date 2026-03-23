@@ -2,6 +2,7 @@ import { db } from '$lib/server/db';
 import { testimonial } from '$lib/server/db/schema';
 import { desc, eq } from 'drizzle-orm';
 import { fail, error } from '@sveltejs/kit';
+import { audit } from '$lib/server/audit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
@@ -34,6 +35,7 @@ export const actions: Actions = {
 			published: true
 		});
 
+		await audit({ action: 'testimonial.create', entity: 'testimonial', details: { authorName, rating }, user: locals.user });
 		return { success: true };
 	},
 	edit: async ({ request, locals }) => {
@@ -49,6 +51,7 @@ export const actions: Actions = {
 		if (!authorName) return fail(400, { message: 'Numele este obligatoriu' });
 
 		await db.update(testimonial).set({ quote, authorName, authorTitle, rating }).where(eq(testimonial.id, id));
+		await audit({ action: 'testimonial.edit', entity: 'testimonial', entityId: id, details: { authorName, rating }, user: locals.user });
 		return { success: true };
 	},
 	delete: async ({ request, locals }) => {
@@ -58,7 +61,9 @@ export const actions: Actions = {
 
 		if (!id) return fail(400, { message: 'ID invalid' });
 
+		const [deleted] = await db.select({ authorName: testimonial.authorName }).from(testimonial).where(eq(testimonial.id, id)).limit(1);
 		await db.delete(testimonial).where(eq(testimonial.id, id));
+		await audit({ action: 'testimonial.delete', entity: 'testimonial', entityId: id, details: { authorName: deleted?.authorName }, user: locals.user });
 		return { success: true };
 	},
 	togglePublish: async ({ request, locals }) => {
@@ -70,6 +75,7 @@ export const actions: Actions = {
 		if (!id) return fail(400, { message: 'ID invalid' });
 
 		await db.update(testimonial).set({ published: !published }).where(eq(testimonial.id, id));
+		await audit({ action: 'testimonial.togglePublish', entity: 'testimonial', entityId: id, details: { published: !published }, user: locals.user });
 		return { success: true };
 	}
 };

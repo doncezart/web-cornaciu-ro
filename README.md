@@ -20,12 +20,15 @@ Professional website for **Cabinet Avocat Cornaciu**, a Romanian law firm. Built
 - **Categories** — create, rename, delete (with referential integrity checks)
 - **Testimonials** — create, edit, delete, publish/unpublish, star ratings
 - **Site Content Editor** — edit any UI text on the public site directly from the admin panel, grouped by section (hero, expertise, footer, etc.), per-locale, with override tracking and reset-to-default
+- **Legal Page Editor** — edit Privacy Policy, GDPR, and Terms & Conditions pages in Markdown with live preview, per-locale (RO/EN/BG), with one-click AI translation via Anthropic Claude
+- **Audit Log** (`/admin/logs`) — tracks every admin action (articles, categories, testimonials, content, legal pages, AI, uploads, auth) with entity badges, details, user attribution, filtering, and pagination
 
 ### AI-Powered Tools (admin only)
 - **Cover image generation** — generates article cover art via OpenAI image API, styled to match the site's visual identity, and uploads to Cloudflare R2
 - **Article summarization** — generates excerpt/summary using Anthropic Claude
 - **Article translation** — translates title, excerpt, and content between Romanian, English, and Bulgarian using Anthropic Claude, and links translations via a `translationGroup` field
 - **Site text translation** — batch-translates admin-edited UI text to EN/BG using Claude; uses source-hash tracking to only translate fields where the Romanian source changed, and never overwrites manually edited translations
+- **Legal page translation** — translates legal pages from Romanian to English/Bulgarian using Claude, preserving Markdown formatting and professional legal tone
 
 ### Infrastructure
 - **Database** — PostgreSQL with [Drizzle ORM](https://orm.drizzle.team/)
@@ -60,6 +63,7 @@ src/
 │   ├── components/          # Svelte components (Nav, Hero, Footer, etc.)
 │   ├── i18n/                # Translation files (ro.json, en.json, bg.json)
 │   ├── server/
+│   │   ├── audit.ts         # Audit log helper
 │   │   ├── auth.ts          # Better Auth config
 │   │   ├── r2.ts            # Cloudflare R2 upload helpers
 │   │   └── db/
@@ -79,6 +83,8 @@ src/
 │   │   ├── articole/        # Article management (list, create, edit)
 │   │   ├── categorii/       # Category management
 │   │   ├── continut/        # Site content/text editor with AI translate
+│   │   ├── legal/           # Legal page editor with AI translate
+│   │   ├── logs/            # Audit log viewer
 │   │   └── testimoniale/    # Testimonial management
 │   ├── api/                 # API endpoints
 │   │   ├── generate-image/  # AI cover image generation
@@ -160,7 +166,13 @@ AI and R2 features are optional — the site works without them but admin AI too
 
 **testimonial** — Client testimonials with author info, quotes, and star ratings
 
+**legalPage** — Legal page content in Markdown, per slug (confidentialitate, gdpr, termeni) and locale
+
 **siteText** — Per-locale UI text overrides with source-hash tracking for smart AI re-translation
+
+**siteTextHistory** — Version history for site text fields, storing previous values before edits, deletes, translations, or restores
+
+**auditLog** — Admin activity log with action type, entity, details (JSON), user attribution, and timestamps
 
 **user / session / account / verification** — Better Auth authentication tables
 

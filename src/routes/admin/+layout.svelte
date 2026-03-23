@@ -24,6 +24,8 @@
 			<a href="/admin/categorii" class:active={isActive('/admin/categorii')} onclick={() => mobileOpen = false}>Categorii</a>
 			<a href="/admin/testimoniale" class:active={isActive('/admin/testimoniale')} onclick={() => mobileOpen = false}>Testimoniale</a>
 			<a href="/admin/continut" class:active={isActive('/admin/continut')} onclick={() => mobileOpen = false}>Conținut Site</a>
+			<a href="/admin/legal" class:active={isActive('/admin/legal')} onclick={() => mobileOpen = false}>Pagini Legale</a>
+			<a href="/admin/logs" class:active={isActive('/admin/logs')} onclick={() => mobileOpen = false}>Logs</a>
 		</nav>
 		<div class="admin-user">
 			<span>{data.user.name ?? data.user.email}</span>

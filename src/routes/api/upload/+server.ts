@@ -1,5 +1,6 @@
 import { json, error } from '@sveltejs/kit';
 import { uploadToR2 } from '$lib/server/r2';
+import { audit } from '$lib/server/audit';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async (event) => {
@@ -54,6 +55,7 @@ export const POST: RequestHandler = async (event) => {
 
 	try {
 		const url = await uploadToR2(uploadFile);
+		await audit({ action: 'upload.image', entity: 'upload', details: { fileName: file.name, fileType: file.type, fileSize: file.size, url }, user: event.locals.user });
 		return json({ url });
 	} catch (err) {
 		console.error('R2 upload failed:', err);

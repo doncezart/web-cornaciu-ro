@@ -30,7 +30,9 @@
 <section class="legal-body">
 	<div class="container-narrow">
 		<div class="content">
-			{#if locale === 'en'}
+			{#if data.legalContent}
+				{@html data.legalContent}
+			{:else if locale === 'en'}
 				<h2>1. Acceptance of Terms</h2>
 				<p>
 					Accessing and using the cornaciu.ro website implies acceptance of these terms and conditions.

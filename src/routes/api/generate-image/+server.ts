@@ -1,6 +1,7 @@
 import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { uploadBufferToR2 } from '$lib/server/r2';
+import { audit } from '$lib/server/audit';
 import type { RequestHandler } from './$types';
 
 const STYLE_PREFIX = `Luxury minimalist editorial illustration for a prestigious law firm website. Warm tones of taupe (#6B5A3E), cream (#F8F6F3), and muted gold. Elegant, sophisticated, clean composition with generous negative space. Soft natural lighting, slightly desaturated warm color grading. Professional and authoritative mood. No text or watermarks.`;
@@ -50,6 +51,8 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 
 	const imageBuffer = Buffer.from(b64, 'base64');
 	const url = await uploadBufferToR2(imageBuffer, 'image/png', 'png', 'covers');
+
+	await audit({ action: 'ai.generateImage', entity: 'ai', details: { title, url }, user: locals.user });
 
 	return json({ url });
 };

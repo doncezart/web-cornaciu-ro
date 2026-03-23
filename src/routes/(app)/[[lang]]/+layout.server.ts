@@ -16,7 +16,7 @@ export const load: LayoutServerLoad = async ({ params, cookies }) => {
 		locale = langParam;
 	}
 
-	cookies.set('locale', locale, { path: '/', maxAge: 60 * 60 * 24 * 365, httpOnly: false, secure: false, sameSite: 'lax' });
+	cookies.set('locale', locale, { path: '/', maxAge: 60 * 60 * 24 * 365, httpOnly: false, secure: true, sameSite: 'lax' });
 
 	const rows = await db.select().from(siteText).where(eq(siteText.locale, locale));
 	const overrides: Record<string, string> = {};

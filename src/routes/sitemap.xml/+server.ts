@@ -1,8 +1,12 @@
 import { db } from '$lib/server/db';
 import { article } from '$lib/server/db/schema';
 import { eq, desc } from 'drizzle-orm';
-import { locales, localePath } from '$lib/i18n';
+import { locales, localePath, type Locale } from '$lib/i18n';
 import type { RequestHandler } from './$types';
+
+function escapeXml(s: string): string {
+	return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 
 export const GET: RequestHandler = async () => {
 	const articles = await db
@@ -24,7 +28,7 @@ export const GET: RequestHandler = async () => {
 	// Static pages in all locales
 	for (const page of staticPages) {
 		for (const locale of locales) {
-			const loc = `https://cornaciu.ro${localePath(page.path, locale)}`;
+			const loc = escapeXml(`https://cornaciu.ro${localePath(page.path, locale)}`);
 			urls.push(`  <url>
     <loc>${loc}</loc>
     <priority>${page.priority}</priority>
@@ -34,7 +38,7 @@ export const GET: RequestHandler = async () => {
 
 	// Articles in their respective locale
 	for (const a of articles) {
-		const loc = `https://cornaciu.ro${localePath(`/articole/${a.slug}`, a.lang)}`;
+		const loc = escapeXml(`https://cornaciu.ro${localePath(`/articole/${a.slug}`, a.lang as Locale)}`);
 		const lastmod = a.updatedAt ? new Date(a.updatedAt).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
 		urls.push(`  <url>
     <loc>${loc}</loc>

@@ -1,5 +1,6 @@
 import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
+import { audit } from '$lib/server/audit';
 import type { RequestHandler } from './$types';
 
 const langNames: Record<string, string> = {
@@ -57,6 +58,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	try {
 		const cleaned = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
 		const translated = JSON.parse(cleaned);
+		await audit({ action: 'ai.translateArticle', entity: 'ai', details: { sourceLang, targetLang, title }, user: locals.user });
 		return json({
 			title: translated.title || '',
 			excerpt: translated.excerpt || '',

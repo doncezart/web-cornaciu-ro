@@ -44,8 +44,8 @@ export function getDefaultTranslations(locale: Locale): Record<string, string> {
 	return flattenTranslations(translations[locale] as unknown as Record<string, unknown>);
 }
 
-export function isLocale(value: string): value is Locale {
-	return locales.includes(value as Locale);
+export function isLocale(value: string | undefined): value is Locale {
+	return typeof value === 'string' && locales.includes(value as Locale);
 }
 
 /** Get a nested translation value by dot-separated key */

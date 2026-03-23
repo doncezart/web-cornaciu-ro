@@ -2,6 +2,7 @@ import { db } from '$lib/server/db';
 import { category, article } from '$lib/server/db/schema';
 import { eq, sql } from 'drizzle-orm';
 import { fail, error } from '@sveltejs/kit';
+import { audit } from '$lib/server/audit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
@@ -34,6 +35,7 @@ export const actions: Actions = {
 		} catch {
 			return fail(400, { message: 'Această categorie există deja' });
 		}
+		await audit({ action: 'category.create', entity: 'category', details: { name }, user: locals.user });
 		return { success: true };
 	},
 
@@ -49,6 +51,7 @@ export const actions: Actions = {
 		} catch {
 			return fail(400, { message: 'Această categorie există deja' });
 		}
+		await audit({ action: 'category.update', entity: 'category', entityId: id, details: { name }, user: locals.user });
 		return { success: true };
 	},
 
@@ -72,6 +75,7 @@ export const actions: Actions = {
 		}
 
 		await db.delete(category).where(eq(category.id, id));
+		await audit({ action: 'category.delete', entity: 'category', entityId: id, details: { name: cat.name }, user: locals.user });
 		return { success: true };
 	}
 };

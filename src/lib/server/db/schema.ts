@@ -1,4 +1,4 @@
-import { pgTable, serial, integer, text, boolean, timestamp, json } from 'drizzle-orm/pg-core';
+import { pgTable, serial, integer, text, boolean, timestamp, json, unique } from 'drizzle-orm/pg-core';
 
 export const article = pgTable('article', {
 	id: serial('id').primaryKey(),
@@ -42,6 +42,35 @@ export const siteText = pgTable('site_text', {
 	value: text('value').notNull(),
 	sourceHash: text('source_hash'),
 	updatedAt: timestamp('updated_at', { mode: 'date' }).defaultNow()
+}, (t) => [unique().on(t.key, t.locale)]);
+
+export const siteTextHistory = pgTable('site_text_history', {
+	id: serial('id').primaryKey(),
+	key: text('key').notNull(),
+	locale: text('locale').notNull(),
+	value: text('value').notNull(),
+	sourceHash: text('source_hash'),
+	changeType: text('change_type').notNull(), // 'edit' | 'delete' | 'translate' | 'restore'
+	changedAt: timestamp('changed_at', { mode: 'date' }).defaultNow()
+});
+
+export const legalPage = pgTable('legal_page', {
+	id: serial('id').primaryKey(),
+	slug: text('slug').notNull(), // 'gdpr' | 'termeni' | 'confidentialitate'
+	locale: text('locale').notNull(), // 'ro' | 'en' | 'bg'
+	content: text('content').notNull(),
+	updatedAt: timestamp('updated_at', { mode: 'date' }).defaultNow()
+}, (t) => [unique().on(t.slug, t.locale)]);
+
+export const auditLog = pgTable('audit_log', {
+	id: serial('id').primaryKey(),
+	action: text('action').notNull(),
+	entity: text('entity').notNull(), // 'article' | 'category' | 'testimonial' | 'content' | 'ai' | 'upload' | 'auth'
+	entityId: text('entity_id'),
+	details: json('details').$type<Record<string, unknown>>(),
+	userId: text('user_id'),
+	userEmail: text('user_email'),
+	createdAt: timestamp('created_at', { mode: 'date' }).defaultNow()
 });
 
 export * from './auth.schema';

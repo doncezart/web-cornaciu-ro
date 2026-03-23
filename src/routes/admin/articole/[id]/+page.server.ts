@@ -4,6 +4,7 @@ import { article, category } from '$lib/server/db/schema';
 import { eq, and, ne } from 'drizzle-orm';
 import { locales } from '$lib/i18n';
 import { slugify } from '$lib/utils/slugify';
+import { audit } from '$lib/server/audit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -77,6 +78,8 @@ export const actions: Actions = {
 				.where(and(eq(article.translationGroup, existing.translationGroup), ne(article.id, id)));
 		}
 
+		await audit({ action: 'article.update', entity: 'article', entityId: id, details: { title, slug, lang, category: categoryName }, user: locals.user });
+
 		return { success: true };
 	},
 
@@ -123,6 +126,8 @@ export const actions: Actions = {
 				published, publishedAt, editHistory,
 				updatedAt: new Date()
 			}).where(eq(article.id, trId));
+
+			await audit({ action: 'article.translation.update', entity: 'article', entityId: trId, details: { title, lang, mainArticleId: mainId }, user: locals.user });
 		} else {
 			// Create new translation
 			let slug = slugify(title);
@@ -140,6 +145,8 @@ export const actions: Actions = {
 				translationGroup: groupId,
 				publishedAt: published ? new Date() : null
 			});
+
+			await audit({ action: 'article.translation.create', entity: 'article', entityId: mainId, details: { title, lang, mainArticleId: mainId }, user: locals.user });
 		}
 
 		return { translationSaved: lang };
@@ -152,7 +159,9 @@ export const actions: Actions = {
 
 		if (!translationId) return fail(400, { message: 'ID invalid' });
 
+		const [deleted] = await db.select({ title: article.title, lang: article.lang }).from(article).where(eq(article.id, translationId)).limit(1);
 		await db.delete(article).where(eq(article.id, translationId));
+		await audit({ action: 'article.translation.delete', entity: 'article', entityId: translationId, details: { title: deleted?.title, lang: deleted?.lang }, user: locals.user });
 		return { translationDeleted: true };
 	},
 
@@ -166,6 +175,7 @@ export const actions: Actions = {
 		const publishedAt = published ? (existing.publishedAt ?? new Date()) : null;
 
 		await db.update(article).set({ published, publishedAt, updatedAt: new Date() }).where(eq(article.id, id));
+		await audit({ action: 'article.togglePublish', entity: 'article', entityId: id, details: { published, title: existing.title }, user: locals.user });
 		return { success: true };
 	},
 
@@ -182,6 +192,7 @@ export const actions: Actions = {
 		const publishedAt = published ? (existing.publishedAt ?? new Date()) : null;
 
 		await db.update(article).set({ published, publishedAt, updatedAt: new Date() }).where(eq(article.id, translationId));
+		await audit({ action: 'article.translation.togglePublish', entity: 'article', entityId: translationId, details: { published, title: existing.title, lang: existing.lang }, user: locals.user });
 		return { translationSaved: existing.lang };
 	}
 };

@@ -30,7 +30,9 @@
 <section class="legal-body">
 	<div class="container-narrow">
 		<div class="content">
-			{#if locale === 'en'}
+			{#if data.legalContent}
+				{@html data.legalContent}
+			{:else if locale === 'en'}
 				<h2>1. Our Commitment</h2>
 				<p>
 					Cornaciu Cătălin Law Office is fully committed to complying with Regulation (EU) 2016/679

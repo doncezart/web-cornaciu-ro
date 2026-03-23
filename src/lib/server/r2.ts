@@ -27,7 +27,11 @@ export async function uploadToR2(
 		throw new Error('R2 is not configured. Set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME, and R2_PUBLIC_URL in .env');
 	}
 
+	const allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'avif'];
 	const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
+	if (!allowedExtensions.includes(ext)) {
+		throw new Error(`File extension .${ext} is not allowed`);
+	}
 	const key = `${folder}/${Date.now()}-${crypto.randomUUID().slice(0, 8)}.${ext}`;
 	const buffer = Buffer.from(await file.arrayBuffer());
 

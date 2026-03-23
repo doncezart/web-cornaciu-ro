@@ -2,6 +2,7 @@ import { db } from '$lib/server/db';
 import { article } from '$lib/server/db/schema';
 import { desc, eq } from 'drizzle-orm';
 import { fail, error } from '@sveltejs/kit';
+import { audit } from '$lib/server/audit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
@@ -21,7 +22,9 @@ export const actions: Actions = {
 
 		if (!id) return fail(400, { message: 'ID invalid' });
 
+		const [deleted] = await db.select({ title: article.title }).from(article).where(eq(article.id, id)).limit(1);
 		await db.delete(article).where(eq(article.id, id));
+		await audit({ action: 'article.delete', entity: 'article', entityId: id, details: { title: deleted?.title }, user: locals.user });
 		return { success: true };
 	},
 	togglePublish: async ({ request, locals }) => {
@@ -47,6 +50,7 @@ export const actions: Actions = {
 			.set({ published: newPublished, publishedAt })
 			.where(eq(article.id, id));
 
+		await audit({ action: 'article.togglePublish', entity: 'article', entityId: id, details: { published: newPublished, title: existing?.title }, user: locals.user });
 		return { success: true };
 	},
 	toggleFeatured: async ({ request, locals }) => {
@@ -62,6 +66,7 @@ export const actions: Actions = {
 			.set({ featured: !featured })
 			.where(eq(article.id, id));
 
+		await audit({ action: 'article.toggleFeatured', entity: 'article', entityId: id, details: { featured: !featured }, user: locals.user });
 		return { success: true };
 	}
 };

@@ -1,6 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { auth } from '$lib/server/auth';
+import { audit } from '$lib/server/audit';
 import { db } from '$lib/server/db';
 import { article, testimonial, category } from '$lib/server/db/schema';
 import { sql, eq } from 'drizzle-orm';
@@ -29,6 +30,7 @@ export const load: PageServerLoad = async () => {
 
 export const actions: Actions = {
 	signOut: async (event) => {
+		await audit({ action: 'auth.signOut', entity: 'auth', user: event.locals.user });
 		await auth.api.signOut({
 			headers: event.request.headers
 		});

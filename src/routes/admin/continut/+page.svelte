@@ -8,6 +8,16 @@
 	let translating = $state(false);
 	let translateResult = $state<{ count: number; error?: string } | null>(null);
 	let expandedSections = $state<Record<string, boolean>>({});
+	let historyOpen = $state<string | null>(null);
+	let historyEntries = $state<{ id: number; value: string; changeType: string; changedAt: string | null }[]>([]);
+	let historyLoading = $state(false);
+
+	const changeTypeLabels: Record<string, string> = {
+		edit: 'Editare manuală',
+		delete: 'Resetare',
+		translate: 'Traducere AI',
+		restore: 'Restaurare'
+	};
 
 	function toggleSection(section: string) {
 		expandedSections[section] = !expandedSections[section];
@@ -16,6 +26,7 @@
 	function switchLocale(e: Event) {
 		const select = e.target as HTMLSelectElement;
 		translateResult = null;
+		historyOpen = null;
 		goto(`/admin/continut?limba=${select.value}`);
 	}
 
@@ -39,16 +50,63 @@
 			fd.set('locale', data.locale);
 			const res = await fetch('?/translate', { method: 'POST', body: fd });
 			const html = await res.text();
-			// SvelteKit form actions return HTML — reload to get fresh data
 			await invalidateAll();
-			// Parse result from the refreshed form prop after invalidation
-			// Since we used fetch directly, just reload
 			goto(`/admin/continut?limba=${data.locale}`, { invalidateAll: true });
 		} catch (err) {
 			translateResult = { count: 0, error: 'Eroare la traducere' };
 		} finally {
 			translating = false;
 		}
+	}
+
+	async function toggleHistory(key: string) {
+		if (historyOpen === key) {
+			historyOpen = null;
+			return;
+		}
+		historyLoading = true;
+		historyOpen = key;
+		historyEntries = [];
+		try {
+			const fd = new FormData();
+			fd.set('key', key);
+			fd.set('locale', data.locale);
+			const res = await fetch('?/history', { method: 'POST', body: fd });
+			const html = await res.text();
+			// Parse the JSON data from the SvelteKit action response
+			const match = html.match(/data-sveltekit-form-result="([^"]+)"/);
+			if (match) {
+				const decoded = match[1].replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+				const parsed = JSON.parse(decoded);
+				if (parsed.data?.historyEntries) {
+					historyEntries = parsed.data.historyEntries;
+				}
+			}
+		} catch {
+			historyEntries = [];
+		} finally {
+			historyLoading = false;
+		}
+	}
+
+	async function restoreVersion(historyId: number) {
+		const fd = new FormData();
+		fd.set('historyId', String(historyId));
+		fd.set('locale', data.locale);
+		await fetch('?/restore', { method: 'POST', body: fd });
+		historyOpen = null;
+		goto(`/admin/continut?limba=${data.locale}`, { invalidateAll: true });
+	}
+
+	function formatDate(iso: string | null): string {
+		if (!iso) return '—';
+		return new Date(iso).toLocaleString('ro-RO', {
+			day: '2-digit',
+			month: 'short',
+			year: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit'
+		});
 	}
 </script>
 
@@ -67,6 +125,10 @@
 			</select>
 		</div>
 	</div>
+
+	{#if form?.restored}
+		<div class="toast success">Versiunea anterioară a fost restaurată.</div>
+	{/if}
 
 	{#if form?.success}
 		<div class="toast success">Modificările au fost salvate.</div>
@@ -146,9 +208,22 @@
 											<span class="auto-badge" title="Tradus automat cu AI">AI</span>
 										{/if}
 									</div>
-									{#if field.override !== null}
-										<button type="button" class="reset-btn" title="Resetează la implicit" onclick={() => resetField(field.key)}>↩</button>
-									{/if}
+									<div class="field-actions">
+										{#if field.historyCount > 0}
+											<button
+												type="button"
+												class="history-btn"
+												class:active={historyOpen === field.key}
+												title="Istoric versiuni ({field.historyCount})"
+												onclick={() => toggleHistory(field.key)}
+											>
+												🕓 {field.historyCount}
+											</button>
+										{/if}
+										{#if field.override !== null}
+											<button type="button" class="reset-btn" title="Resetează la implicit" onclick={() => resetField(field.key)}>↩</button>
+										{/if}
+									</div>
 								</div>
 								{#if field.defaultValue.length > 80}
 									<textarea
@@ -168,6 +243,30 @@
 								{/if}
 								{#if field.override !== null}
 									<span class="default-hint">Implicit: {field.defaultValue}</span>
+								{/if}
+								{#if historyOpen === field.key}
+									<div class="history-panel">
+										{#if historyLoading}
+											<p class="history-loading">Se încarcă istoricul...</p>
+										{:else if historyEntries.length === 0}
+											<p class="history-empty">Niciun istoric disponibil.</p>
+										{:else}
+											{#each historyEntries as entry}
+												<div class="history-entry">
+													<div class="history-entry-header">
+														<span class="history-type">{changeTypeLabels[entry.changeType] ?? entry.changeType}</span>
+														<span class="history-date">{formatDate(entry.changedAt)}</span>
+													</div>
+													<div class="history-value">{entry.value}</div>
+													<button
+														type="button"
+														class="history-restore-btn"
+														onclick={() => restoreVersion(entry.id)}
+													>Restaurează</button>
+												</div>
+											{/each}
+										{/if}
+									</div>
 								{/if}
 							</div>
 						{/each}
@@ -431,6 +530,103 @@
 	.reset-btn:hover {
 		border-color: #c53030;
 		color: #c53030;
+	}
+
+	.field-actions {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.history-btn {
+		background: none;
+		border: 1px solid var(--border);
+		font-size: 12px;
+		cursor: pointer;
+		padding: 2px 8px;
+		color: var(--gray);
+		font-family: var(--font-sans);
+		transition: all 0.2s ease;
+	}
+
+	.history-btn:hover,
+	.history-btn.active {
+		border-color: #1e40af;
+		color: #1e40af;
+		background: #eff6ff;
+	}
+
+	.history-panel {
+		margin-top: 10px;
+		border: 1px solid var(--border);
+		background: #fafaf9;
+		max-height: 300px;
+		overflow-y: auto;
+	}
+
+	.history-loading,
+	.history-empty {
+		padding: 12px 16px;
+		font-size: 13px;
+		color: var(--gray);
+		font-style: italic;
+	}
+
+	.history-entry {
+		padding: 10px 16px;
+		border-bottom: 1px solid #f0eeeb;
+	}
+
+	.history-entry:last-child {
+		border-bottom: none;
+	}
+
+	.history-entry-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 4px;
+	}
+
+	.history-type {
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.3px;
+		color: var(--gray);
+	}
+
+	.history-date {
+		font-size: 11px;
+		color: var(--gray);
+	}
+
+	.history-value {
+		font-size: 13px;
+		color: var(--primary);
+		margin-bottom: 6px;
+		word-break: break-word;
+		white-space: pre-wrap;
+		background: white;
+		padding: 6px 10px;
+		border: 1px solid #f0eeeb;
+	}
+
+	.history-restore-btn {
+		font-size: 11px;
+		padding: 3px 10px;
+		background: none;
+		border: 1px solid var(--border);
+		color: var(--gray);
+		cursor: pointer;
+		font-family: var(--font-sans);
+		transition: all 0.2s ease;
+	}
+
+	.history-restore-btn:hover {
+		border-color: var(--secondary);
+		color: var(--secondary);
+		background: #fef3e2;
 	}
 
 	input[type='text'],
