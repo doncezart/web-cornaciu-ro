@@ -10,10 +10,10 @@
 	let { locale, t }: Props = $props();
 
 	const stats = $derived([
-		{ value: '500+', label: t('results.cases') },
-		{ value: '98%', label: t('results.rate') },
-		{ value: '21+', label: t('results.years') },
-		{ value: '€10M+', label: t('results.recovered') }
+		{ value: t('results.casesValue'), label: t('results.cases') },
+		{ value: t('results.rateValue'), label: t('results.rate') },
+		{ value: t('results.yearsValue'), label: t('results.years') },
+		{ value: t('results.recoveredValue'), label: t('results.recovered') }
 	]);
 </script>
 

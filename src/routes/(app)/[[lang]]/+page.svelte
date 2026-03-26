@@ -45,10 +45,10 @@
 <Seo {locale} title={t('seo.defaultTitle')} description={t('seo.defaultDescription')} url="https://cornaciu.ro{localePath('/', locale)}" />
 
 <Hero {locale} {t} />
-<ExpertiseGrid {locale} {t} />
+<ExpertiseGrid {locale} {t} expertiseOrder={data.expertiseOrder ?? undefined} />
 <Results {locale} {t} />
 <About {locale} {t} />
 <Testimonials {testimonials} {locale} {t} />
 <Approach {locale} {t} />
 <ArticleCards articles={data.articles} {locale} {t} />
-<ContactSection {locale} {t} />
+<ContactSection {locale} {t} contactEntries={data.contactEntries ?? undefined} />

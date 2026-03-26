@@ -43,7 +43,11 @@
 		"cases": "Cazuri Finalizate cu Succes",
 		"rate": "Rată de Succes în Litigii",
 		"years": "Ani Experiență în Barou",
-		"recovered": "Valoare Recuperată pentru Clienți"
+		"recovered": "Valoare Recuperată pentru Clienți",
+		"casesValue": "500+",
+		"rateValue": "98%",
+		"yearsValue": "21+",
+		"recoveredValue": "€10M+"
 	},
 	"about": {
 		"label": "Despre Cabinet",

@@ -43,7 +43,11 @@
 		"cases": "Successfully Completed Cases",
 		"rate": "Litigation Success Rate",
 		"years": "Years of Bar Experience",
-		"recovered": "Value Recovered for Clients"
+		"recovered": "Value Recovered for Clients",
+		"casesValue": "500+",
+		"rateValue": "98%",
+		"yearsValue": "21+",
+		"recoveredValue": "€10M+"
 	},
 	"about": {
 		"label": "About the Office",

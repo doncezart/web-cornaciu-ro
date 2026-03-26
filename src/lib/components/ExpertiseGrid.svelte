@@ -6,11 +6,13 @@
 	interface Props {
 		locale: Locale;
 		t: (key: string, params?: Record<string, string | number>) => string;
+		expertiseOrder?: string[];
 	}
 
-	let { locale, t }: Props = $props();
+	let { locale, t, expertiseOrder }: Props = $props();
 
-	const areaKeys = ['civil', 'commercial', 'family', 'realestate', 'labor'] as const;
+	const defaultOrder = ['civil', 'commercial', 'family', 'realestate', 'labor'];
+	const areaKeys = $derived(expertiseOrder && expertiseOrder.length > 0 ? expertiseOrder : defaultOrder);
 </script>
 
 <section id="experienta" class="expertise">

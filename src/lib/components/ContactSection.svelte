@@ -2,12 +2,28 @@
 	import { reveal } from '$lib/actions/reveal';
 	import type { Locale } from '$lib/i18n';
 
+	interface ContactEntry {
+		type: string;
+		label: string;
+		value: string;
+		linkPrefix?: string;
+	}
+
 	interface Props {
 		locale: Locale;
 		t: (key: string, params?: Record<string, string | number>) => string;
+		contactEntries?: ContactEntry[];
 	}
 
-	let { locale, t }: Props = $props();
+	let { locale, t, contactEntries }: Props = $props();
+
+	const defaultEntries: ContactEntry[] = [
+		{ type: 'address', label: t('contact.address'), value: 'Strada Trandafirilor nr. 3, Etaj 3\nPiata Centrala Giurgiu, Romania' },
+		{ type: 'phone', label: t('contact.phone'), value: '+40 723 370 737', linkPrefix: 'tel:' },
+		{ type: 'email', label: t('contact.email'), value: 'office@cornaciu.ro\nsecretariat@cornaciu.ro', linkPrefix: 'mailto:' }
+	];
+
+	const entries = $derived(contactEntries && contactEntries.length > 0 ? contactEntries : defaultEntries);
 </script>
 
 <section id="contact" class="contact">
@@ -19,26 +35,21 @@
 		</div>
 		<div class="contact-grid" use:reveal>
 			<div class="contact-info animate-in">
-				<div class="contact-item">
-					<div class="contact-label">{t('contact.address')}</div>
-					<div class="contact-value">
-						Strada Trandafirilor nr. 3, Etaj 3<br />
-						Piata Centrala Giurgiu, Romania
+				{#each entries as entry}
+					<div class="contact-item">
+						<div class="contact-label">{entry.label}</div>
+						<div class="contact-value">
+							{#each entry.value.split('\n') as line, i}
+								{#if i > 0}<br />{/if}
+								{#if entry.linkPrefix}
+									<a href="{entry.linkPrefix}{line.replace(/\s/g, '')}">{line}</a>
+								{:else}
+									{line}
+								{/if}
+							{/each}
+						</div>
 					</div>
-				</div>
-				<div class="contact-item">
-					<div class="contact-label">{t('contact.phone')}</div>
-					<div class="contact-value">
-						<a href="tel:+40723370737">+40 723 370 737</a>
-					</div>
-				</div>
-				<div class="contact-item">
-					<div class="contact-label">{t('contact.email')}</div>
-					<div class="contact-value">
-						<a href="mailto:office@cornaciu.ro">office@cornaciu.ro</a><br />
-						<a href="mailto:secretariat@cornaciu.ro">secretariat@cornaciu.ro</a>
-					</div>
-				</div>
+				{/each}
 			</div>
 			<div class="map-wrapper animate-in">
 				<iframe

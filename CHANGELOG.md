@@ -4,6 +4,26 @@ All notable changes to the **cornaciu.ro** project are documented in this file.
 
 ---
 
+## v1.9 — 2025-07-17
+
+### Added — CMS Rework
+- **Page tabs** in admin content editor — content organized into Pagina Principală, Despre Mine, Articole, Global tabs
+- **`siteConfig` DB table** — key-value JSON store for structured site configuration (expertise order, contact entries)
+- **Expertise drag-and-drop reorder** — admin panel to rearrange the order of practice area cards on the homepage
+- **Dynamic contact entries** — add, remove, and edit contact info (address, phone, email, custom) from the admin, stored in `siteConfig`
+- **Friendly field labels** — Romanian human-readable labels for common i18n keys in the content editor (e.g. `results.casesValue` → "📊 Număr cazuri")
+- **Stat value i18n keys** — `results.casesValue`, `results.rateValue`, `results.yearsValue`, `results.recoveredValue` in all 3 locale files
+
+### Changed
+- `Hero.svelte` and `Results.svelte` — stat numbers now read from i18n keys instead of being hardcoded
+- `ExpertiseGrid.svelte` — accepts `expertiseOrder` prop for configurable card order
+- `ContactSection.svelte` — refactored to accept dynamic `contactEntries` prop with fallback defaults
+- Homepage `+page.server.ts` — loads `siteConfig` rows and passes `expertiseOrder` + `contactEntries` to page
+- Admin `continut/+page.server.ts` — fully rewritten with page definitions, section grouping, field metadata, and new `saveExpertiseOrder`/`saveContactEntries` actions
+- Admin `continut/+page.svelte` — complete UI rewrite with page tabs, section accordions, expertise reorder panel, contact entries editor, and history/reset per field
+
+---
+
 ## v1.8 — 2026-03-26
 
 ### Added — About Me Page & Navigation

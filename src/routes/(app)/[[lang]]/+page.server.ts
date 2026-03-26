@@ -1,5 +1,5 @@
 import { db } from '$lib/server/db';
-import { article, testimonial } from '$lib/server/db/schema';
+import { article, testimonial, siteConfig } from '$lib/server/db/schema';
 import { desc, eq, and } from 'drizzle-orm';
 import type { PageServerLoad } from './$types';
 import { isLocale } from '$lib/i18n';
@@ -7,7 +7,7 @@ import { isLocale } from '$lib/i18n';
 export const load: PageServerLoad = async ({ params }) => {
 	const lang = isLocale(params.lang) ? params.lang : 'ro';
 
-	const [articles, testimonials] = await Promise.all([
+	const [articles, testimonials, configRows] = await Promise.all([
 		db
 			.select()
 			.from(article)
@@ -19,8 +19,17 @@ export const load: PageServerLoad = async ({ params }) => {
 			.from(testimonial)
 			.where(eq(testimonial.published, true))
 			.orderBy(desc(testimonial.createdAt))
-			.limit(3)
+			.limit(3),
+		db.select().from(siteConfig)
 	]);
 
-	return { articles, testimonials };
+	const config: Record<string, unknown> = {};
+	for (const row of configRows) config[row.key] = row.value;
+
+	return {
+		articles,
+		testimonials,
+		expertiseOrder: (config['expertise.order'] as string[] | undefined) ?? null,
+		contactEntries: (config['contact.entries'] as Array<{ type: string; label: string; value: string; linkPrefix?: string }> | undefined) ?? null
+	};
 };

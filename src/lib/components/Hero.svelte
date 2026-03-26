@@ -22,15 +22,15 @@
 				</div>
 				<div class="hero-stats">
 					<div class="stat">
-						<span class="stat-number">21+</span>
+						<span class="stat-number">{t('results.yearsValue')}</span>
 						<span class="stat-label">{t('hero.statYears')}</span>
 					</div>
 					<div class="stat">
-						<span class="stat-number">500+</span>
+						<span class="stat-number">{t('results.casesValue')}</span>
 						<span class="stat-label">{t('hero.statCases')}</span>
 					</div>
 					<div class="stat">
-						<span class="stat-number">98%</span>
+						<span class="stat-number">{t('results.rateValue')}</span>
 						<span class="stat-label">{t('hero.statRate')}</span>
 					</div>
 				</div>

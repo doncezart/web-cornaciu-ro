@@ -73,4 +73,11 @@ export const auditLog = pgTable('audit_log', {
 	createdAt: timestamp('created_at', { mode: 'date' }).defaultNow()
 });
 
+export const siteConfig = pgTable('site_config', {
+	id: serial('id').primaryKey(),
+	key: text('key').notNull().unique(),
+	value: json('value').$type<unknown>().notNull(),
+	updatedAt: timestamp('updated_at', { mode: 'date' }).defaultNow()
+});
+
 export * from './auth.schema';
