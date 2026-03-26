@@ -22,7 +22,7 @@
 				</div>
 				<div class="hero-stats">
 					<div class="stat">
-						<span class="stat-number">35+</span>
+						<span class="stat-number">21+</span>
 						<span class="stat-label">{t('hero.statYears')}</span>
 					</div>
 					<div class="stat">

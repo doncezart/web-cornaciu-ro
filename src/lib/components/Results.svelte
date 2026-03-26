@@ -12,7 +12,7 @@
 	const stats = $derived([
 		{ value: '500+', label: t('results.cases') },
 		{ value: '98%', label: t('results.rate') },
-		{ value: '35+', label: t('results.years') },
+		{ value: '21+', label: t('results.years') },
 		{ value: '€10M+', label: t('results.recovered') }
 	]);
 </script>
