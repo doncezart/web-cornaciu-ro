@@ -4,6 +4,20 @@ All notable changes to the **cornaciu.ro** project are documented in this file.
 
 ---
 
+## v1.8 — 2026-03-26
+
+### Added — About Me Page & Navigation
+- New `/despre` route — dedicated "About Me" page with biography, professional philosophy, credentials, and consultation CTA
+- i18n support for the about page in all 3 languages (RO, EN, BG) via `aboutPage.*` keys
+- Contrasting CTA card in the Expertise Grid section (replaces 6th card with dark-background link to `/despre`)
+- "Learn More" CTA button in the About section linking to the `/despre` page
+
+### Changed
+- ExpertiseGrid now shows 5 practice areas + 1 CTA card (was 6 practice areas)
+- About component imports `localePath` for locale-aware button link
+
+---
+
 ## v1.7 — 2026-03-26
 
 ### Added — Project Management

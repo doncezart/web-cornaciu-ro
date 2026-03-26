@@ -33,7 +33,8 @@
 		"labor": "Labour Law",
 		"laborDesc": "Individual and collective labour disputes, contract negotiations and employment relations advisory.",
 		"criminal": "Criminal Law",
-		"criminalDesc": "Strategic criminal defence, assistance during investigation and trial representation."
+		"criminalDesc": "Strategic criminal defence, assistance during investigation and trial representation.",
+		"ctaButton": "See More →"
 	},
 	"results": {
 		"label": "Proven Results",
@@ -54,7 +55,8 @@
 		"cred1": "Member of the Giurgiu Bar",
 		"cred2": "Certified in Mediation and Alternative Dispute Resolution",
 		"cred3": "Continuous Training in European Law",
-		"cred4": "Member of the International Bar Association"
+		"cred4": "Member of the International Bar Association",
+		"ctaButton": "About Me →"
 	},
 	"testimonials": {
 		"label": "Client Feedback",
@@ -152,5 +154,28 @@
 		"termsTitle": "Terms and Conditions",
 		"termsSeoDesc": "Terms and conditions of use for the Cornaciu Cătălin Law Office website."
 	},
-	"skipLink": "Skip to content"
+	"skipLink": "Skip to content",
+	"aboutPage": {
+		"breadcrumbHome": "Home",
+		"breadcrumbAbout": "About Me",
+		"seoTitle": "About Lawyer Cornaciu Cătălin | Cornaciu Law Office",
+		"seoDesc": "Discover the story of lawyer Cornaciu Cătălin — over 35 years of legal experience in civil, commercial and criminal law.",
+		"label": "About Me",
+		"title": "Lawyer Cornaciu Cătălin",
+		"subtitle": "Over 35 Years of Legal Excellence",
+		"bio1": "I began my professional career as a lawyer in 1990, immediately after graduating from the Faculty of Law. Since then, I have been fully dedicated to legal practice, building a career founded on competence, integrity and concrete results.",
+		"bio2": "Throughout over three decades of practice, I have successfully represented the interests of hundreds of clients — both individuals and legal entities — in cases of varying complexity, from civil and commercial litigation to major criminal proceedings.",
+		"bio3": "My approach is based on rigorous analysis, a legal strategy tailored to each case, and transparent communication with the client. I believe every case deserves maximum attention and a personalised solution.",
+		"philosophyTitle": "Professional Philosophy",
+		"philosophy1": "I firmly believe that the legal profession is not merely a career, but a vocation that demands responsibility towards every client and towards the justice system.",
+		"philosophy2": "The principles guiding my work are: meticulous preparation, devotion to the client's interests, and adherence to the highest ethical and professional standards.",
+		"credentialsTitle": "Qualifications & Affiliations",
+		"cred1": "Member of the Giurgiu Bar since 1990",
+		"cred2": "Certified in Mediation and Alternative Dispute Resolution",
+		"cred3": "Continuous Training in European Law",
+		"cred4": "Member of the International Bar Association",
+		"ctaTitle": "Need Legal Assistance?",
+		"ctaDescription": "Schedule a free consultation to discuss your legal situation.",
+		"ctaButton": "Schedule Consultation"
+	}
 }

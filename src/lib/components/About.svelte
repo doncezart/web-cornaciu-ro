@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
+	import { localePath } from '$lib/i18n';
 	import type { Locale } from '$lib/i18n';
 
 	interface Props {
@@ -28,6 +29,7 @@
 						<li>{t('about.cred4')}</li>
 					</ul>
 				</div>
+				<a href={localePath('/despre', locale)} class="about-cta">{t('about.ctaButton')}</a>
 			</div>
 			<div class="about-image-wrapper animate-in" use:reveal>
 				<div class="about-image">
@@ -105,6 +107,26 @@
 		width: 8px;
 		height: 1px;
 		background: var(--secondary);
+	}
+
+	.about-cta {
+		display: inline-block;
+		margin-top: 40px;
+		padding: 18px 40px;
+		font-size: 15px;
+		font-weight: 500;
+		color: var(--white);
+		background: var(--primary);
+		border: 2px solid var(--primary);
+		text-decoration: none;
+		letter-spacing: 0.5px;
+		transition: all 0.3s ease;
+		font-family: var(--font-sans);
+	}
+
+	.about-cta:hover {
+		background: transparent;
+		color: var(--primary);
 	}
 
 	.about-image {

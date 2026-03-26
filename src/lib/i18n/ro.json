@@ -33,7 +33,8 @@
 		"labor": "Dreptul Muncii",
 		"laborDesc": "Litigii individuale și colective de muncă, negocieri contractuale și consultanță în relații de muncă.",
 		"criminal": "Drept Penal",
-		"criminalDesc": "Apărare penală strategică, asistență în faza de urmărire penală și reprezentare în proces."
+		"criminalDesc": "Apărare penală strategică, asistență în faza de urmărire penală și reprezentare în proces.",
+		"ctaButton": "Vezi Mai Multe →"
 	},
 	"results": {
 		"label": "Rezultate Demonstrate",
@@ -54,7 +55,8 @@
 		"cred1": "Membru al Baroului Giurgiu",
 		"cred2": "Certificat în Mediare și Soluționare Alternativă a Disputelor",
 		"cred3": "Formator Continuu în Drept European",
-		"cred4": "Membru al Asociației Internaționale a Avocaților"
+		"cred4": "Membru al Asociației Internaționale a Avocaților",
+		"ctaButton": "Despre Mine →"
 	},
 	"testimonials": {
 		"label": "Feedback Clienți",
@@ -152,5 +154,28 @@
 		"termsTitle": "Termeni și Condiții",
 		"termsSeoDesc": "Termenii și condițiile de utilizare a site-ului Cabinetului de Avocatură Cornaciu Cătălin."
 	},
-	"skipLink": "Sari la conținut"
+	"skipLink": "Sari la conținut",
+	"aboutPage": {
+		"breadcrumbHome": "Acasă",
+		"breadcrumbAbout": "Despre Mine",
+		"seoTitle": "Despre Avocat Cornaciu Cătălin | Cabinet Avocat Cornaciu",
+		"seoDesc": "Descoperiți povestea avocatului Cornaciu Cătălin — peste 35 de ani de experiență juridică în drept civil, comercial și penal.",
+		"label": "Despre Mine",
+		"title": "Avocat Cornaciu Cătălin",
+		"subtitle": "Peste 35 de Ani de Excelență Juridică",
+		"bio1": "Am început activitatea profesională în calitate de avocat în anul 1990, imediat după absolvirea Facultății de Drept. De atunci, m-am dedicat complet practicii juridice, construind o carieră fundamentată pe competență, integritate și rezultate concrete.",
+		"bio2": "De-a lungul a peste trei decenii de activitate, am reprezentat cu succes interesele a sute de clienți — persoane fizice și juridice — în cauze de complexitate variată, de la litigii civile și comerciale până la proceduri penale de amploare.",
+		"bio3": "Abordarea mea se bazează pe analiză riguroasă, strategie juridică adaptată fiecărui caz și comunicare transparentă cu clientul. Consider că fiecare caz merită atenție maximă și o soluție personalizată.",
+		"philosophyTitle": "Filosofia Profesională",
+		"philosophy1": "Cred cu tărie că avocatura nu este doar o profesie, ci o vocație care impune responsabilitate față de fiecare client și față de sistemul de justiție.",
+		"philosophy2": "Principiile care ghidează activitatea mea sunt: pregătire meticuloasă, devotament față de interesele clientului și respectarea celor mai înalte standarde etice și profesionale.",
+		"credentialsTitle": "Calificări și Afilieri",
+		"cred1": "Membru al Baroului Giurgiu din 1990",
+		"cred2": "Certificat în Mediare și Soluționare Alternativă a Disputelor",
+		"cred3": "Formator Continuu în Drept European",
+		"cred4": "Membru al Asociației Internaționale a Avocaților",
+		"ctaTitle": "Aveți Nevoie de Asistență Juridică?",
+		"ctaDescription": "Programați o consultație gratuită pentru a discuta situația dumneavoastră juridică.",
+		"ctaButton": "Programare Consultație"
+	}
 }

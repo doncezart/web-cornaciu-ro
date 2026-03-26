@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
+	import { localePath } from '$lib/i18n';
 	import type { Locale } from '$lib/i18n';
 
 	interface Props {
@@ -9,7 +10,7 @@
 
 	let { locale, t }: Props = $props();
 
-	const areaKeys = ['civil', 'commercial', 'family', 'realestate', 'labor', 'criminal'] as const;
+	const areaKeys = ['civil', 'commercial', 'family', 'realestate', 'labor'] as const;
 </script>
 
 <section id="experienta" class="expertise">
@@ -27,6 +28,9 @@
 					<p>{t(`expertise.${key}Desc`)}</p>
 				</div>
 			{/each}
+			<a href={localePath('/despre', locale)} class="expertise-cta animate-in">
+				<span class="cta-text">{t('expertise.ctaButton')}</span>
+			</a>
 		</div>
 	</div>
 </section>
@@ -92,6 +96,48 @@
 		line-height: 1.8;
 		font-size: 15px;
 		font-weight: 300;
+	}
+
+	.expertise-cta {
+		padding: 56px 48px;
+		background: var(--primary);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 24px;
+		text-decoration: none;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		position: relative;
+	}
+
+	.expertise-cta::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 0;
+		height: 2px;
+		background: var(--accent);
+		transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.expertise-cta:hover {
+		background: var(--secondary);
+	}
+
+	.expertise-cta:hover::before {
+		width: 100%;
+	}
+
+	.cta-text {
+		font-family: var(--font-sans);
+		font-size: 18px;
+		font-weight: 500;
+		color: var(--white);
+		text-align: center;
+		line-height: 1.4;
+		letter-spacing: 0.3px;
 	}
 
 	@media (max-width: 968px) {
