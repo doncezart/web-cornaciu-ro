@@ -4,6 +4,7 @@
 		"expertise": "Expertiza",
 		"approach": "Abordare",
 		"articles": "Publicații",
+		"caseStudies": "Studii de Caz",
 		"contact": "Contact",
 		"cta": "Consultație Gratuită",
 		"menuLabel": "Meniu navigare"
@@ -143,6 +144,42 @@
 		"ctaDescription": "Contactați-ne pentru o evaluare profesională a situației dumneavoastră juridice și pentru a primi asistență specializată.",
 		"ctaButton": "Programare Consultație",
 		"availableIn": "Disponibil și în: "
+	},
+	"caseStudies": {
+		"pageTitle": "Studii de Caz | Cabinet Avocat Cornaciu",
+		"pageDescription": "Studii de caz și rezultate concrete din practica juridică. Exemple de cazuri finalizate cu succes.",
+		"breadcrumbHome": "Acasă",
+		"breadcrumbCaseStudies": "Studii de Caz",
+		"heading": "Studii de Caz",
+		"description": "Exemple concrete din practica noastră juridică, demonstrând expertiza și rezultatele obținute.",
+		"all": "Toate",
+		"noCaseStudies": "Nu există studii de caz publicate momentan. Reveniți în curând.",
+		"readCaseStudy": "Vezi studiul de caz →",
+		"prevPage": "← Anterioare",
+		"nextPage": "Următoare →",
+		"pageOf": "Pagina {page} din {total}",
+		"minRead": "{min} min lectură"
+	},
+	"caseStudyDetail": {
+		"breadcrumbCaseStudy": "Studiu de Caz",
+		"authorName": "Avocat Cornaciu Cătălin",
+		"authorRole": "Partener, Cornaciu",
+		"authorBio": "Cu peste 35 de ani de experiență în domeniul dreptului civil și comercial, oferă consultanță juridică specializată și reprezentare în instanță pentru clienți corporativi și individuali.",
+		"tags": "Etichete:",
+		"relatedLabel": "Studii Similare",
+		"relatedTitle": "Alte Studii de Caz",
+		"ctaTitle": "Aveți o Situație Similară?",
+		"ctaDescription": "Contactați-ne pentru o evaluare profesională a cazului dumneavoastră.",
+		"ctaButton": "Programare Consultație",
+		"availableIn": "Disponibil și în: "
+	},
+	"caseStudyCards": {
+		"label": "Studii de Caz",
+		"title": "Cazuri de Succes",
+		"description": "Rezultate concrete din practica noastră juridică.",
+		"readMore": "Vezi studiul de caz →",
+		"viewAll": "Toate Studiile de Caz →",
+		"imageAlt": "Imagine Studiu de Caz"
 	},
 	"seo": {
 		"defaultTitle": "Cabinet Avocat Cornaciu | Excelență în Drept",

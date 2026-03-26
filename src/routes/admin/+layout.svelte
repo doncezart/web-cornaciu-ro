@@ -21,6 +21,7 @@
 		<nav class="admin-nav">
 			<a href="/admin" class:active={isActive('/admin')} onclick={() => mobileOpen = false}>Dashboard</a>
 			<a href="/admin/articole" class:active={isActive('/admin/articole')} onclick={() => mobileOpen = false}>Articole</a>
+			<a href="/admin/studii-de-caz" class:active={isActive('/admin/studii-de-caz')} onclick={() => mobileOpen = false}>Studii de Caz</a>
 			<a href="/admin/categorii" class:active={isActive('/admin/categorii')} onclick={() => mobileOpen = false}>Categorii</a>
 			<a href="/admin/testimoniale" class:active={isActive('/admin/testimoniale')} onclick={() => mobileOpen = false}>Testimoniale</a>
 			<a href="/admin/continut" class:active={isActive('/admin/continut')} onclick={() => mobileOpen = false}>Conținut Site</a>

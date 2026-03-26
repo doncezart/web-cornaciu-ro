@@ -23,6 +23,7 @@
 					<li><a href="{localePath('/', locale)}#experienta">{t('nav.expertise')}</a></li>
 					<li><a href="{localePath('/', locale)}#abordare">{t('nav.approach')}</a></li>
 					<li><a href={localePath('/articole', locale)}>{t('nav.articles')}</a></li>
+					<li><a href={localePath('/studii-de-caz', locale)}>{t('nav.caseStudies')}</a></li>
 					<li><a href="{localePath('/', locale)}#contact">{t('nav.contact')}</a></li>
 				</ul>
 			</div>

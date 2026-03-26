@@ -11,9 +11,15 @@ export const load: PageServerLoad = async ({ url, params }) => {
 	const page = Math.max(1, Number(url.searchParams.get('pagina')) || 1);
 	const categoryFilter = url.searchParams.get('categorie') || null;
 
+	const baseConditions = [
+		eq(article.published, true),
+		eq(article.lang, lang),
+		eq(article.contentType, 'case-study')
+	];
+
 	const where = categoryFilter
-		? and(eq(article.published, true), eq(article.category, categoryFilter), eq(article.lang, lang), eq(article.contentType, 'article'))
-		: and(eq(article.published, true), eq(article.lang, lang), eq(article.contentType, 'article'));
+		? and(...baseConditions, eq(article.category, categoryFilter))
+		: and(...baseConditions);
 
 	const [{ count: totalCount }] = await db
 		.select({ count: sql<number>`count(*)` })
@@ -23,7 +29,7 @@ export const load: PageServerLoad = async ({ url, params }) => {
 	const total = Number(totalCount);
 	const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
 
-	const articles = await db
+	const caseStudies = await db
 		.select()
 		.from(article)
 		.where(where)
@@ -31,15 +37,14 @@ export const load: PageServerLoad = async ({ url, params }) => {
 		.limit(PER_PAGE)
 		.offset((page - 1) * PER_PAGE);
 
-	// Get all categories that have published articles in this language
 	const categories = await db
 		.selectDistinct({ category: article.category })
 		.from(article)
-		.where(and(eq(article.published, true), eq(article.lang, lang), eq(article.contentType, 'article')))
+		.where(and(eq(article.published, true), eq(article.lang, lang), eq(article.contentType, 'case-study')))
 		.orderBy(article.category);
 
 	return {
-		articles,
+		caseStudies,
 		page,
 		totalPages,
 		total,

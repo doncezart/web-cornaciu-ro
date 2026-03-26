@@ -11,7 +11,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		db
 			.select()
 			.from(article)
-			.where(and(eq(article.published, true), eq(article.featured, true), eq(article.lang, lang)))
+			.where(and(eq(article.published, true), eq(article.featured, true), eq(article.lang, lang), eq(article.contentType, 'article')))
 			.orderBy(desc(article.publishedAt))
 			.limit(3),
 		db

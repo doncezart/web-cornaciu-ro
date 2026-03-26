@@ -13,21 +13,20 @@ export const load: PageServerLoad = async ({ params }) => {
 	const [found] = await db
 		.select()
 		.from(article)
-		.where(and(eq(article.slug, params.slug), eq(article.published, true), eq(article.contentType, 'article')))
+		.where(and(eq(article.slug, params.slug), eq(article.published, true), eq(article.contentType, 'case-study')))
 		.limit(1);
 
 	if (!found) {
-		error(404, 'Articolul nu a fost găsit');
+		error(404, 'Studiul de caz nu a fost găsit');
 	}
 
 	const related = await db
 		.select()
 		.from(article)
-		.where(and(eq(article.published, true), eq(article.lang, lang), eq(article.contentType, 'article'), ne(article.id, found.id)))
+		.where(and(eq(article.published, true), eq(article.lang, lang), eq(article.contentType, 'case-study'), ne(article.id, found.id)))
 		.orderBy(desc(article.publishedAt))
 		.limit(3);
 
-	// Get translations of this article (same translationGroup)
 	const translations = found.translationGroup
 		? await db
 				.select({ lang: article.lang, slug: article.slug })
@@ -43,5 +42,5 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const rawHtml = await marked.parse(found.content);
 	const htmlContent = DOMPurify.sanitize(rawHtml);
-	return { article: { ...found, content: htmlContent }, related, translations };
+	return { caseStudy: { ...found, content: htmlContent }, related, translations };
 };

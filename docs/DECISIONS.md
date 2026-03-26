@@ -98,6 +98,18 @@
 
 ---
 
+### 9. Content type discriminator column for case studies
+
+**Decision:** Reuse the existing `article` table with a `contentType` text column (`'article'` or `'case-study'`) instead of creating a separate `caseStudy` table.
+
+**Why:** Case studies share identical structure with articles (title, slug, markdown content, category, images, translations, edit history). A discriminator column is the simplest approach — avoids schema duplication, shared categories work naturally, and all AI tools (summarize, translate, generate-image) work without modification.
+
+**Alternatives considered:** Separate `caseStudy` table (rejected: full schema duplication for identical structure), polymorphic base table with type-specific extension tables (rejected: over-engineered for two identical types).
+
+**Date:** 2025-07-18.
+
+---
+
 <!-- Template for new decisions:
 
 ### N. Decision title

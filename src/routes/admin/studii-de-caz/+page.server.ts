@@ -6,13 +6,13 @@ import { audit } from '$lib/server/audit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
-	const articles = await db
+	const caseStudies = await db
 		.select()
 		.from(article)
-		.where(eq(article.contentType, 'article'))
+		.where(eq(article.contentType, 'case-study'))
 		.orderBy(desc(article.createdAt));
 
-	return { articles };
+	return { caseStudies };
 };
 
 export const actions: Actions = {
@@ -25,7 +25,7 @@ export const actions: Actions = {
 
 		const [deleted] = await db.select({ title: article.title }).from(article).where(eq(article.id, id)).limit(1);
 		await db.delete(article).where(eq(article.id, id));
-		await audit({ action: 'article.delete', entity: 'article', entityId: id, details: { title: deleted?.title }, user: locals.user });
+		await audit({ action: 'caseStudy.delete', entity: 'article', entityId: id, details: { title: deleted?.title, contentType: 'case-study' }, user: locals.user });
 		return { success: true };
 	},
 	togglePublish: async ({ request, locals }) => {
@@ -36,7 +36,6 @@ export const actions: Actions = {
 
 		if (!id) return fail(400, { message: 'ID invalid' });
 
-		// Preserve existing publishedAt if re-publishing
 		const [existing] = await db.select().from(article).where(eq(article.id, id)).limit(1);
 		const newPublished = !published;
 		let publishedAt = existing?.publishedAt ?? null;
@@ -51,7 +50,7 @@ export const actions: Actions = {
 			.set({ published: newPublished, publishedAt })
 			.where(eq(article.id, id));
 
-		await audit({ action: 'article.togglePublish', entity: 'article', entityId: id, details: { published: newPublished, title: existing?.title }, user: locals.user });
+		await audit({ action: 'caseStudy.togglePublish', entity: 'article', entityId: id, details: { published: newPublished, title: existing?.title, contentType: 'case-study' }, user: locals.user });
 		return { success: true };
 	},
 	toggleFeatured: async ({ request, locals }) => {
@@ -67,7 +66,7 @@ export const actions: Actions = {
 			.set({ featured: !featured })
 			.where(eq(article.id, id));
 
-		await audit({ action: 'article.toggleFeatured', entity: 'article', entityId: id, details: { featured: !featured }, user: locals.user });
+		await audit({ action: 'caseStudy.toggleFeatured', entity: 'article', entityId: id, details: { featured: !featured, contentType: 'case-study' }, user: locals.user });
 		return { success: true };
 	}
 };

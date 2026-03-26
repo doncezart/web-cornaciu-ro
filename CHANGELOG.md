@@ -4,6 +4,23 @@ All notable changes to the **cornaciu.ro** project are documented in this file.
 
 ---
 
+## v1.10 — 2025-07-18
+
+### Added — Case Studies (Studii de Caz)
+- **`contentType` discriminator column** on `article` table — values `'article'` (default) or `'case-study'`, enabling content type separation without schema duplication
+- **Public case study routes** — `/studii-de-caz` listing page with pagination & category filter, `/studii-de-caz/[slug]` detail page with markdown rendering and related case studies
+- **Admin case study CRUD** — `/admin/studii-de-caz` listing with delete/publish/feature toggles, `/admin/studii-de-caz/nou` creation form, `/admin/studii-de-caz/[id]` full editor with language tabs, translation management, AI tools (summarize, translate, generate cover)
+- **i18n keys** for case studies in all 3 locales (RO, EN, BG) — `nav.caseStudies`, `caseStudies.*`, `caseStudyDetail.*`, `caseStudyCards.*`
+- **Audit actions** — `caseStudy.create`, `caseStudy.update`, `caseStudy.delete`, `caseStudy.togglePublish`, `caseStudy.toggleFeatured`, `caseStudy.translation.*`
+- **"Studii de Caz"** link in admin sidebar, main navigation, and footer
+- **Sitemap** — `/studii-de-caz` static page + dynamic case study URLs with correct base path
+
+### Changed
+- All existing article queries (public listing, detail, homepage featured, admin listing) now filter by `contentType = 'article'`
+- Sitemap groups articles and case studies under their respective URL prefixes
+
+---
+
 ## v1.9 — 2025-07-17
 
 ### Added — CMS Rework

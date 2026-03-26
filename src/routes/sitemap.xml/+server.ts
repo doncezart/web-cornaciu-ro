@@ -1,6 +1,6 @@
 import { db } from '$lib/server/db';
 import { article } from '$lib/server/db/schema';
-import { eq, desc } from 'drizzle-orm';
+import { eq, desc, and } from 'drizzle-orm';
 import { locales, localePath, type Locale } from '$lib/i18n';
 import type { RequestHandler } from './$types';
 
@@ -9,8 +9,8 @@ function escapeXml(s: string): string {
 }
 
 export const GET: RequestHandler = async () => {
-	const articles = await db
-		.select({ slug: article.slug, lang: article.lang, updatedAt: article.updatedAt })
+	const publishedArticles = await db
+		.select({ slug: article.slug, lang: article.lang, updatedAt: article.updatedAt, contentType: article.contentType })
 		.from(article)
 		.where(eq(article.published, true))
 		.orderBy(desc(article.publishedAt));
@@ -18,6 +18,7 @@ export const GET: RequestHandler = async () => {
 	const staticPages = [
 		{ path: '/', priority: '1.0' },
 		{ path: '/articole', priority: '0.8' },
+		{ path: '/studii-de-caz', priority: '0.8' },
 		{ path: '/confidentialitate', priority: '0.3' },
 		{ path: '/termeni', priority: '0.3' },
 		{ path: '/gdpr', priority: '0.3' }
@@ -36,9 +37,10 @@ export const GET: RequestHandler = async () => {
 		}
 	}
 
-	// Articles in their respective locale
-	for (const a of articles) {
-		const loc = escapeXml(`https://cornaciu.ro${localePath(`/articole/${a.slug}`, a.lang as Locale)}`);
+	// Articles and case studies in their respective locale
+	for (const a of publishedArticles) {
+		const basePath = a.contentType === 'case-study' ? '/studii-de-caz' : '/articole';
+		const loc = escapeXml(`https://cornaciu.ro${localePath(`${basePath}/${a.slug}`, a.lang as Locale)}`);
 		const lastmod = a.updatedAt ? new Date(a.updatedAt).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
 		urls.push(`  <url>
     <loc>${loc}</loc>

@@ -4,6 +4,7 @@
 		"expertise": "Expertise",
 		"approach": "Approach",
 		"articles": "Publications",
+		"caseStudies": "Case Studies",
 		"contact": "Contact",
 		"cta": "Free Consultation",
 		"menuLabel": "Navigation menu"
@@ -143,6 +144,42 @@
 		"ctaDescription": "Contact us for a professional assessment of your legal situation and to receive specialised assistance.",
 		"ctaButton": "Schedule Consultation",
 		"availableIn": "Also available in: "
+	},
+	"caseStudies": {
+		"pageTitle": "Case Studies | Cornaciu Law Office",
+		"pageDescription": "Case studies and concrete results from our legal practice. Examples of successfully completed cases.",
+		"breadcrumbHome": "Home",
+		"breadcrumbCaseStudies": "Case Studies",
+		"heading": "Case Studies",
+		"description": "Concrete examples from our legal practice, demonstrating expertise and results achieved.",
+		"all": "All",
+		"noCaseStudies": "No published case studies at the moment. Please check back soon.",
+		"readCaseStudy": "View case study →",
+		"prevPage": "← Previous",
+		"nextPage": "Next →",
+		"pageOf": "Page {page} of {total}",
+		"minRead": "{min} min read"
+	},
+	"caseStudyDetail": {
+		"breadcrumbCaseStudy": "Case Study",
+		"authorName": "Lawyer Cornaciu Cătălin",
+		"authorRole": "Partner, Cornaciu",
+		"authorBio": "With over 35 years of experience in civil and commercial law, providing specialised legal advisory and court representation for corporate and individual clients.",
+		"tags": "Tags:",
+		"relatedLabel": "Similar Studies",
+		"relatedTitle": "Other Case Studies",
+		"ctaTitle": "Have a Similar Situation?",
+		"ctaDescription": "Contact us for a professional assessment of your case.",
+		"ctaButton": "Schedule Consultation",
+		"availableIn": "Also available in: "
+	},
+	"caseStudyCards": {
+		"label": "Case Studies",
+		"title": "Successful Cases",
+		"description": "Concrete results from our legal practice.",
+		"readMore": "View case study →",
+		"viewAll": "All Case Studies →",
+		"imageAlt": "Case Study Image"
 	},
 	"seo": {
 		"defaultTitle": "Cornaciu Law Office | Excellence in Law",

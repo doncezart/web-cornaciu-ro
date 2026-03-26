@@ -7,6 +7,7 @@ export const article = pgTable('article', {
 	excerpt: text('excerpt'),
 	content: text('content').notNull(),
 	category: text('category').notNull(),
+	contentType: text('content_type').notNull().default('article'), // 'article' | 'case-study'
 	imageUrl: text('image_url'),
 	readingTime: integer('reading_time').default(5),
 	published: boolean('published').default(false),

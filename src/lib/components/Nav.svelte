@@ -56,13 +56,14 @@
 				<svg class="logo-icon" viewBox="0 0 24 24" fill="none">
 					<path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z" stroke="currentColor" fill="none" />
 				</svg>
-				AVOCAT CORNACIU
+				<span class="logo-text">AVOCAT<br>CORNACIU</span>
 			</a>
 			<ul class="nav-links" class:mobile-open={mobileOpen}>
 				<li><a href="{localePath('/', locale)}#despre" onclick={closeMobile}>{t('nav.about')}</a></li>
 				<li><a href="{localePath('/', locale)}#experienta" onclick={closeMobile}>{t('nav.expertise')}</a></li>
 				<li><a href="{localePath('/', locale)}#abordare" onclick={closeMobile}>{t('nav.approach')}</a></li>
 				<li><a href={localePath('/articole', locale)} onclick={closeMobile}>{t('nav.articles')}</a></li>
+				<li><a href={localePath('/studii-de-caz', locale)} onclick={closeMobile}>{t('nav.caseStudies')}</a></li>
 				<li><a href="{localePath('/', locale)}#contact" onclick={closeMobile}>{t('nav.contact')}</a></li>
 			</ul>
 
@@ -122,8 +123,14 @@
 		color: var(--primary);
 		display: flex;
 		align-items: center;
-		gap: 12px;
+		gap: 10px;
 		text-decoration: none;
+	}
+
+	.logo-text {
+		font-size: 19px;
+		line-height: 1.2;
+		letter-spacing: 1.5px;
 	}
 
 	.logo-icon {
