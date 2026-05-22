@@ -35,6 +35,10 @@
 		"laborDesc": "Individual and collective labour disputes, contract negotiations and employment relations advisory.",
 		"criminal": "Criminal Law",
 		"criminalDesc": "Strategic criminal defence, assistance during investigation and trial representation.",
+		"traffic": "Road Accidents & Insurance Claims",
+		"trafficDesc": "Recovery of compensation for road accident victims — personal injury, disability or death. Representation in dealings with insurance companies and in litigation.",
+		"maritime": "Maritime Law",
+		"maritimeDesc": "Legal assistance in maritime disputes, shipping contracts, marine insurance and recovery of claims arising from port activities and navigation.",
 		"ctaButton": "See More →"
 	},
 	"results": {
