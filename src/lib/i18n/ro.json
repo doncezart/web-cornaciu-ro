@@ -39,7 +39,22 @@
 		"trafficDesc": "Recuperarea despăgubirilor pentru victime ale accidentelor rutiere — vătămare corporală, invaliditate sau deces. Reprezentare în relația cu companiile de asigurări și în litigii.",
 		"maritime": "Drept Maritim",
 		"maritimeDesc": "Asistență juridică în litigii maritime, contracte de transport naval, asigurări maritime și recuperarea creanțelor rezultate din activități portuare și de navigație.",
-		"ctaButton": "Vezi Mai Multe →"
+		"ctaButton": "Vezi Mai Multe →",
+		"featured1Tag": "Specializare Principală",
+		"featured1Title": "Drept Penal și Apărare Strategică",
+		"featured1Desc": "Apărare penală de nivel înalt în toate fazele procesului - de la cercetare și urmărire penală până la judecată și căile de atac. Experiență dovedită în dosare complexe, infracțiuni economice și cazuri cu impact public.",
+		"featured1Point1": "Apărare în faza de cercetare și urmărire penală",
+		"featured1Point2": "Reprezentare în instanță și contestarea hotărârilor",
+		"featured1Point3": "Infracțiuni economice, corupție și dosare complexe",
+		"featured1Cta": "Detalii",
+		"featured2Tag": "Specializare Principală",
+		"featured2Title": "Accidente Rutiere și Despăgubiri",
+		"featured2Desc": "Recuperarea integrală a despăgubirilor cuvenite victimelor accidentelor rutiere - pentru vătămare corporală, invaliditate permanentă sau deces. Negociere cu asigurătorii și reprezentare în litigii pentru compensații corecte.",
+		"featured2Point1": "Despăgubiri pentru vătămare corporală și invaliditate",
+		"featured2Point2": "Dosare cu deces - compensații pentru urmași",
+		"featured2Point3": "Litigii împotriva asigurătorilor și BAAR",
+		"featured2Cta": "Detalii",
+		"areaLink": "Detalii →"
 	},
 	"results": {
 		"label": "Rezultate Demonstrate",

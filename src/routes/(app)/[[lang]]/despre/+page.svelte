@@ -17,7 +17,7 @@
 />
 
 <section class="about-hero">
-	<div class="container-narrow">
+	<div class="container">
 		<div class="breadcrumb">
 			<a href={localePath('/', locale)}>{t('aboutPage.breadcrumbHome')}</a>
 			<span>/</span>
@@ -30,7 +30,7 @@
 </section>
 
 <section class="about-body">
-	<div class="container-narrow">
+	<div class="container">
 		<div class="about-layout" use:reveal>
 			<div class="about-photo">
 				<img src="/cornaciu2.png" alt="Avocat Cornaciu Cătălin" />

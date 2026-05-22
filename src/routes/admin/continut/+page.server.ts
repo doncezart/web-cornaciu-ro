@@ -76,6 +76,7 @@ const sectionLabels: Record<string, string> = {
 /** Fields that should render as long text (textarea) */
 const longTextFields = new Set([
 	'hero.description', 'expertise.description', 'results.description',
+	'expertise.featured1Desc', 'expertise.featured2Desc',
 	'about.p1', 'about.p2', 'about.p3',
 	'aboutPage.bio1', 'aboutPage.bio2', 'aboutPage.bio3',
 	'aboutPage.philosophy1', 'aboutPage.philosophy2', 'aboutPage.seoDesc',
@@ -106,7 +107,9 @@ const expertiseTextFields = new Set([
 	'expertise.family', 'expertise.familyDesc',
 	'expertise.realestate', 'expertise.realestateDesc',
 	'expertise.labor', 'expertise.laborDesc',
-	'expertise.criminal', 'expertise.criminalDesc'
+	'expertise.criminal', 'expertise.criminalDesc',
+	'expertise.maritime', 'expertise.maritimeDesc',
+	'expertise.traffic', 'expertise.trafficDesc'
 ]);
 
 /** About text fields — shown as combined textareas */
@@ -156,6 +159,21 @@ const fieldLabels: Record<string, string> = {
 	'expertise.laborDesc': 'Dreptul Muncii — descriere',
 	'expertise.criminal': 'Drept Penal — titlu',
 	'expertise.criminalDesc': 'Drept Penal — descriere',
+	'expertise.featured1Tag': 'Specializare 1 — etichetă',
+	'expertise.featured1Title': 'Specializare 1 — titlu',
+	'expertise.featured1Desc': 'Specializare 1 — descriere',
+	'expertise.featured1Point1': 'Specializare 1 — punct 1',
+	'expertise.featured1Point2': 'Specializare 1 — punct 2',
+	'expertise.featured1Point3': 'Specializare 1 — punct 3',
+	'expertise.featured1Cta': 'Specializare 1 — text buton',
+	'expertise.featured2Tag': 'Specializare 2 — etichetă',
+	'expertise.featured2Title': 'Specializare 2 — titlu',
+	'expertise.featured2Desc': 'Specializare 2 — descriere',
+	'expertise.featured2Point1': 'Specializare 2 — punct 1',
+	'expertise.featured2Point2': 'Specializare 2 — punct 2',
+	'expertise.featured2Point3': 'Specializare 2 — punct 3',
+	'expertise.featured2Cta': 'Specializare 2 — text buton',
+	'expertise.areaLink': 'Text link domenii secundare',
 	// About
 	'about.label': 'Etichetă secțiune',
 	'about.title': 'Titlu secțiune',
@@ -385,7 +403,7 @@ export const load: PageServerLoad = async ({ url }) => {
 		pendingTranslations,
 		pages: pageDefinitions.map((p) => ({ id: p.id, label: p.label })),
 		activePage: pageDef.id,
-		expertiseOrder: (config['expertise.order'] as string[] | undefined) ?? ['civil', 'commercial', 'family', 'realestate', 'labor'],
+		expertiseOrder: (config['expertise.order'] as string[] | undefined) ?? ['civil', 'maritime', 'realestate'],
 		contactEntries: (config['contact.entries'] as Array<{ type: string; label: string; value: string; linkPrefix?: string }> | undefined) ?? [
 			{ type: 'address', label: 'Adresă Cabinet', value: 'Strada Trandafirilor nr. 3, Etaj 3\nPiata Centrala Giurgiu, Romania' },
 			{ type: 'phone', label: 'Telefon', value: '+40 723 370 737', linkPrefix: 'tel:' },

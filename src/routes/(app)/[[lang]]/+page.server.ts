@@ -29,7 +29,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	return {
 		articles,
 		testimonials,
-		expertiseOrder: (config['expertise.order'] as string[] | undefined) ?? null,
+		expertiseOrder: (config['expertise.order'] as string[] | undefined) ?? ['civil', 'maritime', 'realestate'],
 		contactEntries: (config['contact.entries'] as Array<{ type: string; label: string; value: string; linkPrefix?: string }> | undefined) ?? null
 	};
 };

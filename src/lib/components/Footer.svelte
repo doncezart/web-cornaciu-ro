@@ -49,10 +49,6 @@
 		</div>
 		<div class="footer-bottom">
 			<p>{t('footer.copyright', { year: new Date().getFullYear().toString() })}</p>
-			<div class="footer-legal">
-				<a href={localePath('/confidentialitate', locale)}>{t('footer.privacy')}</a>
-				<a href={localePath('/termeni', locale)}>{t('footer.terms')}</a>
-			</div>
 		</div>
 	</div>
 </footer>
@@ -137,15 +133,21 @@
 	}
 
 	@media (max-width: 968px) {
+		footer {
+			padding: 56px 0 28px;
+		}
+
 		.footer-grid {
 			grid-template-columns: 1fr;
-			gap: 48px;
+			gap: 40px;
+			margin-bottom: 48px;
 		}
 
 		.footer-bottom {
 			flex-direction: column;
-			gap: 24px;
+			gap: 12px;
 			text-align: center;
+			padding-top: 28px;
 		}
 	}
 </style>

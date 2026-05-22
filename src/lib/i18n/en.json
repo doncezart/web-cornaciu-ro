@@ -39,7 +39,22 @@
 		"trafficDesc": "Recovery of compensation for road accident victims — personal injury, disability or death. Representation in dealings with insurance companies and in litigation.",
 		"maritime": "Maritime Law",
 		"maritimeDesc": "Legal assistance in maritime disputes, shipping contracts, marine insurance and recovery of claims arising from port activities and navigation.",
-		"ctaButton": "See More →"
+		"ctaButton": "See More →",
+		"featured1Tag": "Leading Specialisation",
+		"featured1Title": "Criminal Law & Strategic Defence",
+		"featured1Desc": "High-level criminal defence at every stage of proceedings — from investigation and prosecution through to trial and appeals. Proven experience in complex cases, economic crimes and high-profile matters.",
+		"featured1Point1": "Defence during investigation and prosecution phase",
+		"featured1Point2": "Trial representation and challenging judgments",
+		"featured1Point3": "Economic crimes, corruption and complex cases",
+		"featured1Cta": "Details",
+		"featured2Tag": "Leading Specialisation",
+		"featured2Title": "Road Accidents & Compensation",
+		"featured2Desc": "Full recovery of compensation for road accident victims — personal injury, permanent disability or death. Negotiation with insurers and litigation representation for fair compensation.",
+		"featured2Point1": "Compensation for personal injury and disability",
+		"featured2Point2": "Fatal accident cases — compensation for dependants",
+		"featured2Point3": "Litigation against insurers and BAAR",
+		"featured2Cta": "Details",
+		"areaLink": "Details →"
 	},
 	"results": {
 		"label": "Proven Results",

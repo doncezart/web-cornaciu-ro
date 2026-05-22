@@ -80,7 +80,9 @@
 		family: 'Dreptul Familiei',
 		realestate: 'Drept Imobiliar',
 		labor: 'Dreptul Muncii',
-		criminal: 'Drept Penal'
+		criminal: 'Drept Penal',
+		maritime: 'Drept Maritim',
+		traffic: 'Accidente Rutiere & Despăgubiri'
 	};
 
 	const changeTypeLabels: Record<string, string> = {
